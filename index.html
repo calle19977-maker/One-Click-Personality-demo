@@ -1,0 +1,2775 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>One Click Personality</title>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<meta content="no-store" http-equiv="Cache-Control"/>
+<script src="/theme.js"></script>
+<script src="/settings-ui.js"></script>
+<meta content="light only" name="color-scheme"/>
+<style>
+/***** Refined theme (light blue accents, subtle interactions) *****/
+:root{
+  --bg:#0b1220;
+  --surface:#0f172a;
+  --surface-2:#132238;
+  --text:#e6edf7;
+  --muted:#a5b4cf;
+  --border:rgba(148,163,184,.22);
+  --primary:#67b3ff; /* light blue */
+  --primary-600:#4ea3ff;
+  --primary-700:#2f8df2;
+  --radius:16px;
+  --shadow:0 10px 26px rgba(2,6,23,.32);
+  --shadow-soft:0 8px 20px rgba(2,6,23,.24);
+  --ease:cubic-bezier(.2,.8,.2,1);
+}
+html,body{background:radial-gradient(900px 600px at -12% 0%, rgba(103,179,255,.18), transparent 55%), radial-gradient(900px 600px at 112% 0%, rgba(103,179,255,.18), transparent 55%), var(--bg) !important}
+h1,h2,h3,h4{letter-spacing:.1px}
+.card,.hero,.modal{
+  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+/* Buttons: solid, no neon/shine, calm states */
+button, .button, .seg button{background:transparent;border:none;color:#0f172a;padding:10px 12px;border-radius:10px;transition:background-color 140ms var(--ease)font-weight:600;}
+button:hover, .button:hover
+button:active, .button:active{
+  
+  
+  background: var(--primary-700);
+}
+.seg [aria-selected="true"]{background:#fff}
+/* seg grey hover */
+.seg button{background:transparent;border:none;color:#0f172a;padding:10px 12px;border-radius:10px;transition:background-color 140ms var(--ease)font-weight:600;}
+
+.seg [aria-selected="true"]{background:#fff}
+.seg button:focus{outline:none;box-shadow:none}
+.seg button:hover{background:#eef2f7}
+.seg button:active{background:#e6eaf2}
+/* Inputs */
+select#testId:hover:not(:focus):not(:disabled),
+select#sourceSite:hover:not(:focus):not(:disabled),
+select#profileName:hover:not(:focus):not(:disabled),
+select#postLimit:hover:not(:focus):not(:disabled),
+select#timePeriod:hover:not(:focus):not(:disabled),
+select#privacyFilterMode:hover:not(:focus):not(:disabled){background:#f2f4f8}
+select#testId:active:not(:focus):not(:disabled),
+select#sourceSite:active:not(:focus):not(:disabled),
+select#profileName:active:not(:focus):not(:disabled),
+select#postLimit:active:not(:focus):not(:disabled),
+select#timePeriod:active:not(:focus):not(:disabled),
+select#privacyFilterMode:active:not(:focus):not(:disabled){background:#e6eaf2}
+input,select,textarea{
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  color:var(--text);
+  border:1px solid var(--border);
+  border-radius:12px;
+  transition: background-color 140ms var(--ease), border-color 140ms var(--ease), box-shadow 140ms var(--ease);
+}
+input:focus,select:focus,textarea:focus{
+  border-color: rgba(103,179,255,.9);
+  box-shadow: 0 0 0 3px rgba(103,179,255,.25);
+}
+/* Links */
+a{color:var(--primary); text-decoration:none}
+a:hover{text-decoration:underline}
+/* Remove jumping/glossy animations */
+.bar{animation:none}
+.overlay, .modal{transition:none}
+/* Reduced motion still respected though default is already calm */
+@media (prefers-reduced-motion: reduce){ *{transition:none !important} }
+/***** End refined theme *****/
+
+    :root{ --bg:#f7f9fc; --surface:#ffffff; --text:#0f172a; --muted:#3b485f; --border:#e5eaf3; --primary:#2563eb; --primary-600:#1d4ed8; --accent:#10b981; --accent-600:#059669; --focus:#93c5fd; --shadow:0 10px 30px rgba(2,6,23,.07); --shadow-soft:0 6px 18px rgba(2,6,23,.06) }
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);background:var(--bg)}
+    a{color:var(--primary)} a:hover{text-decoration:underline}
+    .wrap{position:relative;max-width:1100px;margin:32px auto;padding:0 20px}
+    .topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;;margin-bottom:16px}
+    
+    /* Header navigation (plain text links, accessible sizes) */
+    .nav{display:flex;gap:14pxalign-items:center;flex-wrap:nowrap;flex:1 1 auto;overflow:hidden;padding-right:6px}
+    .nav a{display:inline-flex;align-items:center;line-height:24px;padding:10px 8px;border-radius:10px;text-decoration:none;color:var(--primary);white-space:nowrap}
+    .nav a:hover{text-decoration:underline}
+    .nav a:active{}
+    .nav a:focus{outline:2px solid var(--primary-300);outline-offset:2px}
+    @media (max-width:640px){
+      .nav{gap:8px;flex-wrap:nowrap;flex:1 1 auto;overflow:hidden
+  #acctEmail{max-width:16ch;padding-right:6px;margin:0 6px}
+}
+      .nav a{padding:8px 6px;color:#0f172a;white-space:nowrap}
+    }
+.hero{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:20px 20px 8px;box-shadow:var(--shadow)}
+    .hero h1{margin:0 0 6px;font-size:32px}
+    .tagline{color:var(--muted);margin:0 0 16px}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px;box-shadow:var(--shadow-soft)}
+    .grid{display:grid;gap:16px}
+    @media(min-width:900px){ .grid.two{grid-template-columns:1.2fr .8fr} }
+    .row{display:grid;gap:10px}
+    @media(min-width:720px){ .row.two{grid-template-columns:1fr 1fr} }
+    label{font-size:13px;color:var(--muted)}
+    .recommendationLine{display:inline-block;margin-top:2px}
+    input,select,textarea,button{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:#fff;color:#0f172a;outline:none}
+    input::placeholder,textarea::placeholder{color:#9aa7bd}
+    input:focus,select:focus,textarea:focus{border-color:var(--focus);box-shadow:0 0 0 3px rgba(147,197,253,.35)}
+    textarea{min-height:160px}
+    .seg{display:inline-flex;background:#f3f6fc;border:1px solid var(--border);border-radius:12px;padding:4px}
+    .seg button{background:transparent;border:none;color:#0f172a;padding:10px 12px;border-radius:10px;transition:background-color 140ms var(--ease)font-weight:600;}
+    .seg button.active{background:#fff;border:1px solid var(--border);box-shadow:var(--shadow-soft);color:#0f172a}
+    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+    .btn{cursor:pointer;font-weight:700}
+    .btn.primary{background:var(--primary);color:#fff;border:none}
+    .btn.primary:hover{background:var(--primary-600)}
+    .btn.pro{background:var(--accent);color:#fff;border:none}
+    .btn.pro:hover{background:var(--accent-600)}
+    .btn.ghost{background:#fff;border:1px solid var(--border);color:#0f172a}
+    .btn.ghost:hover{background:#f2f4f8}
+    .btn.ghost:active{background:#e6eaf2; }
+
+    /* Account action buttons (Login / Manage billing) — match Subscription page */
+    #loginBtn, #settingsBtn, #logoutBtn{
+      background:var(--primary);
+      color:#fff;
+      border:1px solid var(--primary);
+    }
+    #loginBtn:hover, #settingsBtn:hover, #logoutBtn:hover{
+      background:var(--primary-600);
+      border-color:var(--primary-600);
+    }
+
+    .badge{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid var(--border);font-size:12px;background:#fff}
+    .progress{height:10px;background:#eef2ff;border-radius:999px;overflow:hidden;margin-top:12px;border:1px solid var(--border)}
+    .bar{height:100%;width:28%;background:linear-gradient(90deg,#3b82f6,#60a5fa);animation:load 1.1s infinite ease-in-out}
+    @keyframes load{0%{margin-left:-30%}50%{margin-left:50%}100%{margin-left:100%}}
+    .result{margin-top:12px;white-space:pre-wrap;line-height:1.55;background:#fff;padding:14px;border-radius:12px;border:1px solid var(--border)}
+    .hidden{display:none !important}
+    footer{margin:28px 0 48px;color:#3b485f;font-size:12px;display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+    .links{display:flex;gap:14px;flex-wrap:wrap}
+    .account{display:flex;gap:6px;align-items:center;flex:0 0 auto}
+    .overlay{position:fixed;inset:0;background:rgba(2,6,23,.4);display:none;align-items:center;justify-content:center;padding:16px;z-index:50}
+    .overlay.show{display:flex}
+    .modal{width:100%;max-width:520px;background:#fff;border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow);padding:18px;position:relative}
+    .modal h3{margin:0 0 6px}
+    .modal p{margin:0 0 12px;color:var(--muted)}
+    .oauth{display:flex;gap:10px;flex-direction:column}
+    .oauth a, .modal .btn{display:flex;align-items:center;gap:8px;justify-content:center}
+    .hr{display:flex;align-items:center;gap:8px;color:#64748b;font-size:12px;margin:10px 0}
+    .hr::before,.hr::after{content:'';flex:1;height:1px;background:#e5eaf3}
+    .closex{position:absolute;right:10px;top:8px;display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;padding:0;border:none;background:transparent;font-size:16px;cursor:pointer;color:#64748b;border-radius:6px;line-height:1}
+.closex:hover{background:#f2f4f8}
+.closex:active{background:#e6eaf2}
+.closex:hover{background:#f2f4f8}
+.closex:active{background:#e6eaf2}
+    .hint{font-size:12px;color:#64748b}
+    .sourceOptions{margin-top:12px;display:grid;gap:10px}
+    .sourceOptions .checkRow{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+    .sourceOptions .checkRow input[type=checkbox]{width:auto;padding:0;margin:0;flex:0 0 auto}
+    .privacyFilterGrid{display:grid;gap:10px;align-items:end}
+    @media(min-width:720px){ .privacyFilterGrid{grid-template-columns:1fr 1fr} }
+    .privacyEnableRow{min-height:46px;margin:0}
+    .sourceDateRange{display:grid;gap:10px}
+    @media(min-width:720px){ .sourceDateRange{grid-template-columns:1fr 1fr} }
+    .fieldLabel{display:flex;align-items:center;gap:6px;margin-bottom:6px}
+    .fieldLabel label{margin:0}
+    .infoWrap{position:relative;display:inline-flex;align-items:center}
+    .infoBtn{width:18px;height:18px;padding:0;border-radius:999px;border:1px solid rgba(37,99,235,.35);background:#f1f5ff;color:var(--primary-600);font-size:12px;font-weight:800;line-height:1;display:inline-flex;align-items:center;justify-content:center;cursor:help}
+    .infoBtn:hover{background:#e8efff}
+    .infoTip{position:absolute;left:0;top:calc(100% + 8px);width:min(320px,76vw);padding:10px 12px;border:1px solid var(--border);border-radius:12px;background:#fff;box-shadow:var(--shadow-soft);color:var(--muted);font-size:12px;line-height:1.35;opacity:0;visibility:hidden;pointer-events:none;z-index:120;white-space:normal}
+    .infoWrap:hover .infoTip,.infoWrap:focus-within .infoTip{opacity:1;visibility:visible}
+  
+/* Info style for framework description */
+.descbox.info{display:flex;gap:10px;align-items:flex-start;background:#eff6ff;border:1px solid #bfdbfe;color:#1e3a8a}
+.descbox .icon{flex:0 0 auto;width:18px;height:18px;margin-top:2px;color:#1d4ed8}
+.descbox .text{flex:1 1 auto;font-size:13px;line-height:1.4}
+
+/* Warning style */
+.descbox.warn{display:flex;gap:10px;align-items:flex-start;background:#fff7ed;border:1px solid #fdba74;color:#7c2d12}
+.descbox.warn a{color:inherit;text-decoration:underline}
+.hidden{display:none !important}
+
+#acctEmail{max-width:22ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#64748b;margin:0 6px}
+
+#logoutBtn, #settingsBtn{max-width:72px; white-space:normal; text-align:center; line-height:1.15; padding:8px 8px}
+
+/* PDF prompt: use smaller Windows-style buttons (keep colors/fonts) */
+#pdfOverlay .modal-actions .btn{
+  padding:6px 12px;
+  font-size:13px;
+  min-height:32px;
+  min-width:84px;
+}
+
+
+
+/* Save to profile row (after a Pro run) */
+#saveProfileWrap{
+  margin-top:10px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  width:100%;
+}
+#saveDropdown{
+  position:relative;
+  flex:1 1 240px;
+  min-width:220px;
+  max-width:340px;
+}
+#saveToProfileBtn{
+  width:100% !important;
+  text-align:left;
+}
+#saveToProfileMenu{
+  position:absolute;
+  top:44px;
+  left:0;
+  right:0;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:12px;
+  box-shadow:var(--shadow-soft);
+  overflow:hidden;
+  z-index:20;
+}
+#savedMsg{
+  font-size:14px;
+  color:var(--accent-600);
+  font-weight:600;
+  white-space:nowrap;
+}
+#undoSaveBtn{
+  width:auto !important;
+  white-space:nowrap;
+}
+
+
+/* Match email text style/size to Personality Profile page */
+  #acctEmail { font-size: 13px; color: var(--muted); }
+
+/* Brand mark in hero title */
+h1.brand{display:flex;align-items:center;gap:10px}
+.brand-mark{width:34px;height:34px;flex:0 0 auto;display:inline-block;object-fit:contain}
+
+.brand-mark{object-fit:contain}
+
+.checkRow.unavailable{ opacity:.62; cursor:not-allowed; }
+.checkRow.unavailable input{ cursor:not-allowed; }
+</style>
+  <link rel="stylesheet" href="/theme.css"/>
+  <style id="index-dark-mode-patch">
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .modal,
+html[data-theme="dark"] .result,
+html[data-theme="dark"] #saveToProfileMenu,
+html[data-theme="dark"] .progress{
+  background:linear-gradient(180deg, rgba(19,34,56,.96), rgba(15,23,42,.98)) !important;
+  border-color:rgba(148,163,184,.22) !important;
+  color:var(--text) !important;
+}
+html[data-theme="dark"] .descbox.info{
+  background:linear-gradient(180deg, rgba(19,34,56,.96), rgba(15,23,42,.98)) !important;
+  border-color:rgba(103,179,255,.28) !important;
+  color:var(--text) !important;
+}
+html[data-theme="dark"] .descbox.info .icon,
+html[data-theme="dark"] .descbox.info a{
+  color:var(--primary) !important;
+}
+html[data-theme="dark"] .descbox.warn{
+  background:linear-gradient(180deg, rgba(69,26,3,.28), rgba(15,23,42,.98)) !important;
+  border-color:rgba(251,146,60,.34) !important;
+  color:#fed7aa !important;
+}
+html[data-theme="dark"] .seg{
+  background:rgba(255,255,255,.04) !important;
+  border-color:rgba(148,163,184,.22) !important;
+}
+html[data-theme="dark"] .seg button{
+  background:rgba(2,6,23,.44) !important;
+  border:1px solid rgba(148,163,184,.14) !important;
+  color:var(--text) !important;
+  box-shadow:none !important;
+}
+html[data-theme="dark"] .seg button:hover{
+  background:rgba(255,255,255,.06) !important;
+  border-color:rgba(148,163,184,.22) !important;
+}
+html[data-theme="dark"] .seg button.active,
+html[data-theme="dark"] .seg [aria-selected="true"]{
+  background:rgba(255,255,255,.08) !important;
+  border-color:rgba(148,163,184,.22) !important;
+  color:#ffffff !important;
+}
+html[data-theme="dark"] .seg button.active:hover,
+html[data-theme="dark"] .seg [aria-selected="true"]:hover{
+  background:rgba(255,255,255,.10) !important;
+}
+html[data-theme="dark"] .nav a.btn.ghost,
+html[data-theme="dark"] #loginBtn,
+html[data-theme="dark"] #logoutBtn,
+html[data-theme="dark"] #settingsBtn,
+html[data-theme="dark"] #subscribe,
+html[data-theme="dark"] #saveToProfileBtn,
+html[data-theme="dark"] #undoSaveBtn{
+  background:rgba(255,255,255,.03) !important;
+  border:1px solid rgba(148,163,184,.22) !important;
+  color:var(--text) !important;
+  box-shadow:none !important;
+}
+html[data-theme="dark"] .nav a.btn.ghost:hover,
+html[data-theme="dark"] #loginBtn:hover,
+html[data-theme="dark"] #logoutBtn:hover,
+html[data-theme="dark"] #settingsBtn:hover,
+html[data-theme="dark"] #subscribe:hover,
+html[data-theme="dark"] #saveToProfileBtn:hover,
+html[data-theme="dark"] #undoSaveBtn:hover{
+  background:rgba(255,255,255,.06) !important;
+}
+html[data-theme="dark"] #runFree,
+html[data-theme="dark"] #downloadPdf,
+html[data-theme="dark"] #sendMagic,
+html[data-theme="dark"] #pdfPromptYes,
+html[data-theme="dark"] #profileCreate{
+  background:rgba(103,179,255,.14) !important;
+  border:1px solid rgba(103,179,255,.34) !important;
+  color:#eaf4ff !important;
+  box-shadow:none !important;
+}
+html[data-theme="dark"] #runFree:hover,
+html[data-theme="dark"] #downloadPdf:hover,
+html[data-theme="dark"] #sendMagic:hover,
+html[data-theme="dark"] #pdfPromptYes:hover,
+html[data-theme="dark"] #profileCreate:hover{
+  background:rgba(103,179,255,.22) !important;
+  border-color:rgba(103,179,255,.46) !important;
+}
+html[data-theme="dark"] #runPro{
+  background:rgba(16,185,129,.14) !important;
+  border:1px solid rgba(16,185,129,.34) !important;
+  color:#eafff7 !important;
+  box-shadow:none !important;
+}
+html[data-theme="dark"] #runPro:hover{
+  background:rgba(16,185,129,.22) !important;
+  border-color:rgba(16,185,129,.46) !important;
+}
+html[data-theme="dark"] #subscribe,
+html[data-theme="dark"] #downloadPdf,
+html[data-theme="dark"] #saveToProfileBtn,
+html[data-theme="dark"] #undoSaveBtn{
+  width:auto !important;
+}
+html[data-theme="dark"] #proBadge{
+  background:rgba(16,185,129,.12) !important;
+  border-color:rgba(16,185,129,.34) !important;
+  color:#d1fae5 !important;
+}
+html[data-theme="dark"] .badge{
+  background:rgba(255,255,255,.04) !important;
+  border-color:rgba(148,163,184,.22) !important;
+  color:var(--text) !important;
+}
+html[data-theme="dark"] .infoTip{
+  background:var(--surface) !important;
+  color:var(--text) !important;
+  border-color:rgba(148,163,184,.22) !important;
+}
+html[data-theme="dark"] #authOverlay .oauth .btn.ghost,
+html[data-theme="dark"] #authOverlay .btn.primary,
+html[data-theme="dark"] #pdfOverlay .btn.primary,
+html[data-theme="dark"] #pdfOverlay .btn.ghost,
+html[data-theme="dark"] #profileOverlay .btn.primary,
+html[data-theme="dark"] #profileOverlay .btn.ghost,
+html[data-theme="dark"] #undoOverlay .btn.primary,
+html[data-theme="dark"] #undoOverlay .btn.ghost{
+  background:rgba(255,255,255,.03) !important;
+  border:1px solid rgba(148,163,184,.22) !important;
+  color:var(--text) !important;
+  box-shadow:none !important;
+}
+html[data-theme="dark"] #authOverlay .oauth .btn.ghost:hover,
+html[data-theme="dark"] #authOverlay .btn.primary:hover,
+html[data-theme="dark"] #pdfOverlay .btn.primary:hover,
+html[data-theme="dark"] #pdfOverlay .btn.ghost:hover,
+html[data-theme="dark"] #profileOverlay .btn.primary:hover,
+html[data-theme="dark"] #profileOverlay .btn.ghost:hover,
+html[data-theme="dark"] #undoOverlay .btn.primary:hover,
+html[data-theme="dark"] #undoOverlay .btn.ghost:hover{
+  background:rgba(255,255,255,.06) !important;
+  border-color:rgba(148,163,184,.3) !important;
+}
+</style>
+
+
+<style id="index-layout-hover-fix">
+/* Appended fix: dark-mode select hover + prevent right-side info cards from stretching */
+html[data-theme="dark"] select#testId:hover:not(:focus):not(:disabled),
+html[data-theme="dark"] select#sourceSite:hover:not(:focus):not(:disabled),
+html[data-theme="dark"] select#profileName:hover:not(:focus):not(:disabled),
+html[data-theme="dark"] select#postLimit:hover:not(:focus):not(:disabled),
+html[data-theme="dark"] select#timePeriod:hover:not(:focus):not(:disabled),
+html[data-theme="dark"] select#privacyFilterMode:hover:not(:focus):not(:disabled){
+  background:rgba(255,255,255,.06) !important;
+  border-color:rgba(148,163,184,.30) !important;
+}
+html[data-theme="dark"] select#testId:active:not(:focus):not(:disabled),
+html[data-theme="dark"] select#sourceSite:active:not(:focus):not(:disabled),
+html[data-theme="dark"] select#profileName:active:not(:focus):not(:disabled),
+html[data-theme="dark"] select#postLimit:active:not(:focus):not(:disabled),
+html[data-theme="dark"] select#timePeriod:active:not(:focus):not(:disabled),
+html[data-theme="dark"] select#privacyFilterMode:active:not(:focus):not(:disabled){
+  background:rgba(255,255,255,.10) !important;
+  border-color:rgba(148,163,184,.34) !important;
+}
+@media(min-width:900px){
+  .grid.two{
+    align-items:start;
+  }
+  .grid.two > aside{
+    align-self:start;
+    align-content:start;
+  }
+}
+</style>
+
+
+<style id="index-top-hue-fix">
+html[data-theme="dark"] body{
+  background:
+    radial-gradient(1200px 680px at 10% 0%, rgba(103,179,255,.16), transparent 42%),
+    radial-gradient(1200px 680px at 90% 0%, rgba(103,179,255,.10), transparent 42%),
+    var(--bg) !important;
+}
+</style>
+
+
+<style id="index-top-hue-fix-restore-v2">
+html[data-theme="dark"]{
+  background:
+    radial-gradient(900px 600px at -12% 0%, rgba(103,179,255,.18), transparent 55%),
+    radial-gradient(900px 600px at 112% 0%, rgba(103,179,255,.18), transparent 55%),
+    var(--bg) !important;
+}
+html[data-theme="dark"] body{
+  background:transparent !important;
+}
+</style>
+
+
+
+<style id="index-top-hue-no-repeat-v3">
+html[data-theme="dark"]{
+  background:
+    radial-gradient(900px 600px at -12% 0%, rgba(103,179,255,.18), transparent 55%),
+    radial-gradient(900px 600px at 112% 0%, rgba(103,179,255,.18), transparent 55%),
+    var(--bg) !important;
+  background-repeat:no-repeat !important;
+  background-attachment:scroll !important;
+}
+html[data-theme="dark"] body{
+  background:transparent !important;
+}
+</style>
+
+
+<style id="framework-rich-info-patch">
+.main-test-card{
+  overflow:visible;
+}
+.wrap{
+  --framework-info-top:0px;
+  --framework-info-left:-298px;
+  --framework-info-width:280px;
+  --framework-info-gap:18px;
+}
+.framework-context-row{
+  display:block;
+  margin-top:12px;
+}
+.framework-context-row #testBlurb{
+  align-self:start;
+  height:fit-content;
+  margin:0;
+}
+.framework-rich-panel{
+  min-width:0;
+  padding:0;
+  background:transparent;
+  border:none;
+  box-shadow:none;
+}
+.framework-rich-content{
+  min-height:0;
+  max-height:none;
+  overflow:visible;
+  padding-right:0;
+  line-height:1.78;
+  color:#5f6b7c;
+  font-size:15px;
+  font-weight:400;
+}
+.framework-rich-content a{
+  color:var(--primary);
+}
+.framework-rich-content > :first-child{margin-top:0;}
+.framework-rich-content > :last-child{margin-bottom:0;}
+.framework-rich-content p{
+  margin:0 0 14px;
+}
+.framework-image-wrap{
+  position:relative;
+  display:block;
+  width:100%;
+  margin:0 0 18px;
+  border-radius:22px;
+  overflow:hidden;
+  background:transparent;
+}
+.framework-image-wrap img{
+  display:block;
+  width:100%;
+  max-width:100%;
+  height:auto;
+  border-radius:22px;
+  transform:scale(1.02);
+  filter:drop-shadow(0 14px 24px rgba(15, 23, 42, .12));
+  -webkit-mask-image:
+    radial-gradient(circle at center, rgba(0, 0, 0, 1) 62%, rgba(0, 0, 0, .96) 70%, rgba(0, 0, 0, .72) 80%, transparent 100%),
+    linear-gradient(to right, transparent 0%, #000 13%, #000 87%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, #000 13%, #000 87%, transparent 100%);
+  -webkit-mask-composite:source-in;
+  mask-image:
+    radial-gradient(circle at center, rgba(0, 0, 0, 1) 62%, rgba(0, 0, 0, .96) 70%, rgba(0, 0, 0, .72) 80%, transparent 100%),
+    linear-gradient(to right, transparent 0%, #000 13%, #000 87%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, #000 13%, #000 87%, transparent 100%);
+  mask-composite:intersect;
+}
+html[data-theme="dark"] .framework-image-wrap img{
+  filter:drop-shadow(0 14px 26px rgba(2, 6, 23, .38));
+}
+.framework-rich-panel.is-revealing .framework-rich-content{
+  animation:frameworkInfoReveal 2000ms ease-out both;
+}
+@keyframes frameworkInfoReveal{
+  from{
+    opacity:0;
+    transform:translateY(-72px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+@media(min-width:1660px){
+  .framework-rich-panel{
+    position:absolute;
+    top:var(--framework-info-top);
+    left:var(--framework-info-left);
+    width:var(--framework-info-width);
+    bottom:auto;
+    z-index:1;
+  }
+  .framework-rich-content{
+    max-height:none;
+    height:auto;
+    overflow:visible;
+    padding:0 14px 40px 0;
+  }
+}
+@media(max-width:1659px){
+  .framework-rich-panel{
+    margin-top:12px;
+  }
+  .framework-rich-content{
+    max-height:none;
+    overflow:visible;
+    padding-right:0;
+  }
+}
+html[data-theme="dark"] .framework-rich-content{
+  color:#b9c6d8 !important;
+}
+</style>
+
+
+<style id="custom-test-ui-patch">
+  #customTestControls{margin-top:12px;padding-top:2px;}
+  #customTestControls textarea{min-height:108px;max-height:300px;resize:vertical;line-height:1.45;}
+  .customPromptOnlyRow{display:flex;align-items:center;justify-content:flex-start;gap:8px;min-height:48px;padding:10px 12px;border:1px solid var(--border);border-radius:12px;background:#fff;color:#0f172a;}
+  .customPromptOnlyRow input{width:16px;height:16px;padding:0;box-shadow:none;}
+  .custom-disabled{opacity:.55;filter:grayscale(.15);}
+  .custom-disabled input,.custom-disabled textarea,.custom-disabled select,.custom-disabled button{cursor:not-allowed;}
+  #modeText:disabled{opacity:.5;cursor:not-allowed;}
+  html[data-theme="dark"] .customPromptOnlyRow{background:#132238;color:var(--text);border-color:var(--border);}
+  .customCategoryChoice{display:grid;gap:10px;margin-top:10px;}
+  .customCategoryChoice .small{font-size:12px;color:#64748b;}
+  body.custom-tests-disabled #customTestControls,
+  body.custom-tests-disabled #customCategoryOverlay{display:none !important;}
+</style>
+
+
+<style id="write-mode-ui-patch">
+  #inputModeWrap .seg{width:274px;max-width:100%;}
+  #inputModeWrap .seg button{flex:1 1 0;min-width:0;text-align:center;white-space:normal;line-height:1.15;}
+  .writeTaskPanel{display:grid;gap:10px;margin-bottom:12px;}
+  .writeTaskHeader{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;}
+  .writeQuestionControls{display:inline-flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;width:100%;}
+  #writeTaskCategory{width:auto;min-width:190px;max-width:240px;flex:0 1 220px;}
+  #writeTaskCategory:hover:not(:focus):not(:disabled){background:#f2f4f8}
+  #writeTaskCategory:active:not(:focus):not(:disabled){background:#e6eaf2}
+  .writeGenerateWrap{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:0;min-width:132px;min-height:52px;--cloud-x:50%;--cloud-y:50%;}
+  .writeGenerateWrap .btn{width:auto;white-space:nowrap;flex:0 0 auto;transition:opacity 1.1s var(--ease), transform 1.1s var(--ease), background-color 140ms var(--ease);}
+  .writeTaskEffect{position:absolute;inset:-12px;display:flex;align-items:center;justify-content:center;pointer-events:none;overflow:visible;}
+  .writeTaskEffect .cloud{position:absolute;left:var(--cloud-x);top:var(--cloud-y);border-radius:999px;opacity:0;filter:blur(.8px) saturate(1.2);z-index:2;mix-blend-mode:multiply;transform-origin:center;}
+  .writeTaskEffect .cloud::before,.writeTaskEffect .cloud::after{content:'';position:absolute;border-radius:999px;background:inherit;opacity:.92;filter:blur(.6px);}
+  .writeTaskEffect .cloud::before{width:62%;height:88%;left:12%;top:-35%;}
+  .writeTaskEffect .cloud::after{width:54%;height:72%;right:8%;top:-18%;}
+  .writeTaskEffect .cloud-crimson{background:rgba(220,20,60,.82);}
+  .writeTaskEffect .cloud-yellow{background:rgba(250,204,21,.80);}
+  .writeTaskEffect .cloud-blue{background:rgba(56,189,248,.80);}
+  .writeTaskEffect .cloud-1{width:19px;height:10px;--tx:-24px;--ty:-8px;--rot:-14deg;}
+  .writeTaskEffect .cloud-2{width:17px;height:9px;--tx:-15px;--ty:-16px;--rot:10deg;}
+  .writeTaskEffect .cloud-3{width:20px;height:10px;--tx:0px;--ty:-18px;--rot:-8deg;}
+  .writeTaskEffect .cloud-4{width:16px;height:9px;--tx:15px;--ty:-14px;--rot:14deg;}
+  .writeTaskEffect .cloud-5{width:19px;height:10px;--tx:24px;--ty:-5px;--rot:-12deg;}
+  .writeTaskEffect .cloud-6{width:17px;height:9px;--tx:-22px;--ty:5px;--rot:9deg;}
+  .writeTaskEffect .cloud-7{width:18px;height:10px;--tx:-10px;--ty:13px;--rot:-18deg;}
+  .writeTaskEffect .cloud-8{width:16px;height:9px;--tx:5px;--ty:15px;--rot:16deg;}
+  .writeTaskEffect .cloud-9{width:18px;height:10px;--tx:19px;--ty:9px;--rot:-10deg;}
+  .writeTaskEffect .cloud-10{width:15px;height:8px;--tx:-7px;--ty:-8px;--rot:22deg;}
+  .writeTaskEffect .cloud-11{width:16px;height:9px;--tx:9px;--ty:-6px;--rot:-20deg;}
+  .writeTaskEffect .cloud-12{width:14px;height:8px;--tx:2px;--ty:7px;--rot:18deg;}
+  .writeTaskWheel{position:absolute;width:58px;height:58px;border-radius:50%;opacity:0;transform:scale(.88);background:conic-gradient(from 0deg,#dc143c 0deg,#facc15 115deg,#38bdf8 235deg,#dc143c 360deg);box-shadow:0 5px 16px rgba(99,102,241,.2);z-index:3;}
+  .writeTaskWheel::after{content:'';position:absolute;inset:19px;border-radius:50%;background:#fff;box-shadow:0 0 0 1px rgba(148,163,184,.25) inset;}
+  .writeGenerateWrap.is-clouding .btn{opacity:0;transform:scale(.98);}
+  .writeGenerateWrap.is-clouding .cloud{animation:writeCloudFade 1.15s cubic-bezier(.18,.85,.25,1) forwards;}
+  .writeGenerateWrap.is-clouding .cloud-1{animation-delay:0s;}
+  .writeGenerateWrap.is-clouding .cloud-2{animation-delay:.04s;}
+  .writeGenerateWrap.is-clouding .cloud-3{animation-delay:.08s;}
+  .writeGenerateWrap.is-clouding .cloud-4{animation-delay:.12s;}
+  .writeGenerateWrap.is-clouding .cloud-5{animation-delay:.16s;}
+  .writeGenerateWrap.is-clouding .cloud-6{animation-delay:.20s;}
+  .writeGenerateWrap.is-clouding .cloud-7{animation-delay:.24s;}
+  .writeGenerateWrap.is-clouding .cloud-8{animation-delay:.28s;}
+  .writeGenerateWrap.is-clouding .cloud-9{animation-delay:.32s;}
+  .writeGenerateWrap.is-clouding .cloud-10{animation-delay:.10s;}
+  .writeGenerateWrap.is-clouding .cloud-11{animation-delay:.18s;}
+  .writeGenerateWrap.is-clouding .cloud-12{animation-delay:.26s;}
+  .writeGenerateWrap.is-spinning .btn{opacity:0;visibility:hidden;}
+  .writeGenerateWrap.is-spinning .cloud{opacity:0;}
+  .writeGenerateWrap.is-spinning .writeTaskWheel{opacity:1;transform:scale(1);animation:writeWheelSpin .8s linear infinite;}
+  @keyframes writeCloudFade{0%{opacity:0;transform:translate(-50%,-50%) scale(.16) rotate(0deg)}12%{opacity:.92;transform:translate(calc(-50% + var(--tx) * .10), calc(-50% + var(--ty) * .10)) scale(.68) rotate(calc(var(--rot) * .15))}48%{opacity:.82;transform:translate(calc(-50% + var(--tx) * .52), calc(-50% + var(--ty) * .52)) scale(.98) rotate(calc(var(--rot) * .65))}100%{opacity:0;transform:translate(calc(-50% + var(--tx) * .82), calc(-50% + var(--ty) * .82)) scale(1.08) rotate(var(--rot))}}
+  @keyframes writeWheelSpin{from{transform:scale(1) rotate(0deg)}to{transform:scale(1) rotate(360deg)}}
+  .writeTaskBox{border:1px solid var(--border);background:#f8fafc;border-radius:12px;padding:12px 14px;color:var(--text);line-height:1.45;min-height:52px;}
+  #textInput{min-height:180px;line-height:1.5;resize:vertical;}
+  .writeAnswerMeta{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:4px;}
+  .writeAnswerMeta .hint{margin:0;}
+  #writeWordCount{white-space:nowrap;}
+  .writeDraftActions{display:flex;align-items:center;gap:10px;min-height:70px;flex-wrap:wrap;}
+  .writeDraftActions .btn{width:auto;flex:0 0 auto;}
+  .writeSavedDraftsBlock{display:grid;gap:8px;}
+  .savedDraftControls{display:flex;align-items:center;gap:10px;flex-wrap:nowrap;width:100%;}
+  .savedDraftControls #savedDraftSelect{width:auto;max-width:none;flex:0 0 calc(50% - 5px);min-width:0;}
+  .savedDraftButtonRow{display:flex;align-items:center;gap:10px;flex:1 1 calc(50% - 5px);min-width:0;}
+  .savedDraftButtonRow .btn{width:auto;max-width:none;flex:1 1 0;min-width:0;}
+  @media(max-width:620px){.savedDraftControls{flex-wrap:wrap}.savedDraftControls #savedDraftSelect{width:100%;max-width:100%;flex:1 1 100%;}.savedDraftButtonRow{width:100%;flex:1 1 100%;}.savedDraftButtonRow .btn{flex:1 1 0;width:auto;}}
+  .btn.danger{background:#fff1f2;color:#b91c1c;border:1px solid #fecdd3;}
+  .btn.danger:hover{background:#ffe4e6;color:#991b1b;border-color:#fda4af;}
+  .btn.danger:active{background:#fecdd3;}
+  .writeConfirmRow{margin-top:10px;align-items:flex-start;display:flex !important;gap:8px;}
+  .writeConfirmRow input[type=checkbox]{width:16px;height:16px;padding:0;margin:1px 0 0 0;flex:0 0 auto;box-shadow:none;}
+  .writeConfirmRow span{line-height:1.35;flex:1 1 auto;}
+  html[data-theme="dark"] .writeTaskBox{background:#132238;border-color:var(--border);color:var(--text);}
+  html[data-theme="dark"] .btn.danger{background:rgba(127,29,29,.24);color:#fecaca;border-color:rgba(248,113,113,.38);}
+  html[data-theme="dark"] .btn.danger:hover{background:rgba(153,27,27,.34);color:#fee2e2;border-color:rgba(248,113,113,.55);}
+  html[data-theme="dark"] .btn.danger:active{background:rgba(185,28,28,.42);}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="topbar">
+<div><div class="nav"><a href="/">Home</a><a href="/personality-profile.html">Personality Profile</a><a href="/about.html">About</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a><a href="/ethics.html">Ethics</a><a href="/help.html">Help</a><a class="btn ghost" href="/subscription.html">Subscription</a></div></div>
+<div class="account">
+<span class="hidden" id="acctEmail"></span>
+<button class="btn ghost" id="loginBtn">Log in</button>
+<button class="btn ghost hidden" id="logoutBtn">Log out</button>
+<button class="btn ghost hidden" id="settingsBtn">Settings</button>
+</div>
+</div>
+<div class="hero">
+<h1 class="brand"><img class="brand-mark" src="ocp-logo.png" alt="One Click Personality logo" /><span class="brand-text">One Click Personality</span></h1>
+<p class="tagline">Get your personality analyzed by AI in seconds. Choose a verified online profile and analyze posts from that source. 
+        Our AI models follow scientific standards for test accuracy and personality theory.</p>
+</div>
+<div class="grid two" style="margin-top:18px">
+    <div class="card main-test-card">
+        <div class="row two">
+            <div>
+                <label>Personality framework</label>
+                <select id="testId">
+                    <optgroup label="Personality">
+                        <option value="jungian16">16 Personality Types / Jungian Cognitive Functions</option>
+                        <option value="big5">Big Five (Five-Factor Model)</option>
+                        <option value="temperaments">Four Temperaments</option>
+                        <option value="enneagram">Enneagram</option>
+                    </optgroup>
+                    <optgroup label="Developmental Psychology">
+                        <option value="spiral">Spiral Dynamics</option>
+<option value="mhc">Model of Hierarchical Complexity</option>
+                        <option value="cookgreuter">9 Stages of Ego Development</option>
+                    </optgroup>
+                    <optgroup label="Misc.">
+                        <option value="politicalCompass">Political Compass</option>
+                                                <option value="verbalIQ">Written Verbal IQ</option>
+                        <option value="custom" hidden disabled>Custom</option>
+</optgroup>
+                </select>
+            </div>
+            <div id="inputModeWrap" style="display:flex; align-items:flex-end; justify-content:flex-end">
+                <div aria-label="Input mode" class="seg" role="tablist">
+                    <button aria-selected="true" class="" id="modeWeb" role="tab">Use online profile</button>
+                    <button aria-selected="false" class="" id="modeText" role="tab">Write your own text</button>
+                </div>
+            </div>
+        </div>
+        <section aria-label="Selected framework information" aria-live="polite" class="framework-rich-panel is-revealing" id="frameworkInfoPanel" role="region">
+            <div class="framework-rich-content" id="frameworkInfoContent"></div>
+        </section>
+        <div class="framework-context-row">
+            <div class="descbox info" id="testBlurb" role="note" style="margin:0;padding:10px 12px;border-radius:10px;">
+                <span aria-hidden="true" class="icon">
+                    <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="16" y2="12"></line><line x1="12" x2="12" y1="8" y2="8"></line></svg>
+                </span>
+                <span class="text" id="testBlurbText"></span>
+            </div>
+        </div>
+
+        <div class="custom-test-controls hidden" id="customTestControls">
+            <div class="row">
+                <div>
+                    <label for="customPrompt">Custom test prompt</label>
+                    <textarea id="customPrompt" maxlength="20000" placeholder="Describe the custom test you want AI to run, or paste the test instructions here…"></textarea>
+                </div>
+            </div>
+            <div class="row two" style="margin-top:10px;">
+                <div><label for="customFileInput">Upload files (.pdf, .docx, .txt) — optional</label><input accept=".pdf,.docx,.txt" id="customFileInput" multiple="" type="file" /></div>
+                <label class="customPromptOnlyRow" for="customPromptOnly"><span>Prompt only</span><input id="customPromptOnly" type="checkbox" /></label>
+            </div>
+        </div>
+<div id="webMode" style="margin-top:12px">
+            <div class="row two">
+                <div>
+                    <div class="fieldLabel">
+                        <label for="sourceSite">Source site for social media posts</label>
+                        <span class="infoWrap">
+                            <button aria-label="Information about source site for social media posts" aria-describedby="sourceSiteTip" class="infoBtn" type="button">i</button>
+                            <span class="infoTip" id="sourceSiteTip" role="tooltip">Choose the platform whose verified API should supply the posts for analysis.</span>
+                        </span>
+                    </div>
+                    <select id="sourceSite">
+                        <option value="reddit">Reddit</option>
+                        <option value="youtube">YouTube</option>
+                        <option value="bluesky">Bluesky</option>
+                        <option value="medium">Medium</option>
+                        <option value="substack">Substack</option>
+                        <option value="wordpress">WordPress.com</option>
+                        <option value="mastodon">Mastodon</option>
+                        <option value="blogger">Blogger</option>
+                        <option value="letterboxd">Letterboxd</option>
+                        <option value="tumblr">Tumblr</option>
+                        <option value="stackexchange">Stack Exchange</option>
+                    </select>
+                </div>
+                <div>
+                    <div class="fieldLabel">
+                        <label for="profileName">Online profile name</label>
+                        <span class="infoWrap">
+                            <button aria-label="Information about online profile name" aria-describedby="profileNameTip" class="infoBtn" type="button">i</button>
+                            <span class="infoTip" id="profileNameTip" role="tooltip">Choose an already verified account, or login/verify a new account for the selected platform.</span>
+                        </span>
+                    </div>
+                    <select id="profileName">
+                        <option value="__login_new__">Login/verify new user</option>
+                    </select>
+                </div>
+            </div>
+            <div class="sourceOptions" aria-label="Source post filters">
+                <div class="row two">
+                    <div>
+                        <label for="postLimit">Amount of posts</label>
+                        <select id="postLimit">
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                            <option value="150" selected>150</option>
+                            <option value="250">250</option>
+                            <option value="500">500</option>
+                            <option value="1000">1000</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="timePeriod">Time period</label>
+                        <select id="timePeriod">
+                            <option value="last_7_days">Last 7 days</option>
+                            <option value="last_30_days" selected>Last 30 days</option>
+                            <option value="last_90_days">Last 90 days</option>
+                            <option value="last_365_days">Last 365 days</option>
+                            <option value="all">All available</option>
+                            <option value="custom">From date / To date</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="sourceDateRange hidden" id="sourceDateRange">
+                    <div><label for="fromDate">From date</label><input id="fromDate" type="date" /></div>
+                    <div><label for="toDate">To date</label><input id="toDate" type="date" /></div>
+                </div>
+                <div id="genericIncludeOptions">
+                    <div class="row two">
+                        <label class="checkRow" for="includeReplies"><input id="includeReplies" type="checkbox" /> <span>Replies/comments</span></label>
+                        <label class="checkRow" for="includeReposts"><input id="includeReposts" type="checkbox" /> <span>Reposts/reblogs/retweets</span></label>
+                    </div>
+                    <label class="checkRow" for="includeMediaCaptions"><input id="includeMediaCaptions" type="checkbox" /> <span>Media captions/descriptions</span></label>
+                </div>
+                <div id="youtubeIncludeOptions" class="hidden" aria-label="YouTube content filters">
+                    <div class="row two">
+                        <label class="checkRow" for="youtubeVideosPosted"><input id="youtubeVideosPosted" type="checkbox" checked /> <span>Videos posted</span></label>
+                        <label class="checkRow" for="youtubeShortsPosted"><input id="youtubeShortsPosted" type="checkbox" checked /> <span>Shorts posted</span></label>
+                    </div>
+                    <label class="checkRow" for="youtubePlaylists"><input id="youtubePlaylists" type="checkbox" /> <span>Playlists</span></label>
+                    <div style="height:6px"></div>
+                    <p class="hint">Videos/shorts watched, community posts and comments left by the user are unfortunately not available as data source options.</p>
+                </div>
+            </div>
+        </div>
+        <div class="hidden" id="textMode" style="margin-top:12px">
+            <div class="writeTaskPanel">
+                <div class="writeTaskHeader">
+                    <div class="writeQuestionControls">
+                        <select id="writeTaskCategory" aria-label="Question category">
+                            <option value="" selected>--- Choose question categories ---</option>
+                            <option value="all">All question categories</option>
+                            <option value="preferences">Preferences & hobbies</option>
+                            <option value="decisions">Decisions & values</option>
+                            <option value="learning">Learning & growth</option>
+                            <option value="work">Work & collaboration</option>
+                            <option value="stress">Conflict & stress</option>
+                            <option value="creativity">Creativity & future</option>
+                        </select>
+                        <div class="writeGenerateWrap">
+                            <button class="btn ghost" id="generateWriteTask" type="button">Get question</button>
+                            <div aria-hidden="true" class="writeTaskEffect">
+                                <span class="cloud cloud-crimson cloud-1"></span>
+                                <span class="cloud cloud-yellow cloud-2"></span>
+                                <span class="cloud cloud-blue cloud-3"></span>
+                                <span class="cloud cloud-crimson cloud-4"></span>
+                                <span class="cloud cloud-yellow cloud-5"></span>
+                                <span class="cloud cloud-blue cloud-6"></span>
+                                <span class="cloud cloud-crimson cloud-7"></span>
+                                <span class="cloud cloud-yellow cloud-8"></span>
+                                <span class="cloud cloud-blue cloud-9"></span>
+                                <span class="cloud cloud-crimson cloud-10"></span>
+                                <span class="cloud cloud-yellow cloud-11"></span>
+                                <span class="cloud cloud-blue cloud-12"></span>
+                                <span class="writeTaskWheel"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="writeTaskBox" id="writeTaskBox" role="status" aria-live="polite">
+                    Click “Get question” and write your own answer. This mode is designed for self-authored text rather than imported text.
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <label for="textInput">Your answer</label>
+                    <textarea id="textInput" placeholder="Write your text here. Try writing 250 words or more for more accurate results."></textarea>
+                    <div class="writeAnswerMeta">
+                        <p class="hint" id="writePasteWarning" aria-live="polite"></p>
+                        <p class="hint" id="writeWordCount" aria-live="polite">0 words</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row two">
+                <div>
+                    <label for="draftTitle">Draft title — optional</label>
+                    <input id="draftTitle" placeholder="E.g. Hobbies prompt draft" />
+                </div>
+                <div class="writeDraftActions">
+                    <button class="btn ghost" id="saveDraftBtn" type="button">Save draft</button>
+                    <span class="hint" id="draftStatus" aria-live="polite"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="writeSavedDraftsBlock">
+                    <label for="savedDraftSelect">Saved drafts</label>
+                    <div class="savedDraftControls">
+                        <select id="savedDraftSelect" aria-label="Saved writing drafts">
+                            <option value="">--- ---</option>
+                        </select>
+                        <div class="savedDraftButtonRow">
+                            <button class="btn ghost" id="loadDraftBtn" type="button">Load draft</button>
+                            <button class="btn danger" id="deleteDraftBtn" type="button">Delete draft</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <label class="checkRow writeConfirmRow" for="writeSelfConfirm"><input id="writeSelfConfirm" type="checkbox" /> <span>I confirm this answer was written by me and does not contain text written by another identifiable person without their consent.</span></label>
+            <input id="fileInput" type="file" multiple hidden />
+            <input id="writeTaskId" type="hidden" />
+            <input id="writeTaskText" type="hidden" />
+            <input id="writeTaskCategoryValue" type="hidden" />
+            <input id="writeDraftId" type="hidden" />
+        </div>
+        <div class="sourceOptions" id="privacyOptions" aria-label="Privacy filtering options">
+            <div class="privacyFilterGrid">
+                <div id="privacyFilterModeWrap">
+                    <div class="fieldLabel">
+                        <label for="privacyFilterMode">Privacy filter</label>
+                        <span class="infoWrap">
+                            <button aria-label="Information about privacy filter mode" aria-describedby="privacyFilterModeTip" class="infoBtn" type="button">i</button>
+                            <span class="infoTip" id="privacyFilterModeTip" role="tooltip">For online-profile analyses, basic filtering runs on the server after source content is fetched and before Gemini analysis. Presidio uses the configured privacy-filter service for deeper NLP pseudonymization.</span>
+                        </span>
+                    </div>
+                    <select id="privacyFilterMode">
+                        <option value="server_regex" selected>Basic RegEx filter</option>
+                        <option value="presidio_nlp">Advanced Presidio NLP</option>
+                    </select>
+                </div>
+                <label class="checkRow privacyEnableRow" for="privacyFilterEnabled"><input id="privacyFilterEnabled" type="checkbox" checked /> <span>Enable privacy filter<br><span class="recommendationLine">(recommended)</span></span><span class="infoWrap">
+                    <button aria-label="Information about privacy filter" aria-describedby="privacyEnabledTip" class="infoBtn" type="button">i</button>
+                    <span class="infoTip" id="privacyEnabledTip" role="tooltip">Enabling privacy filter pseudonymizes personal data contained in the selected data source before third-party AI analysis. The filters are not always perfect; see Privacy for more information. Disable only if &quot;I do not care that I'm sending my personal data to Google's Gemini AI models&quot;.</span>
+                </span></label>
+            </div>
+        </div>
+        <div class="actions">
+            <button class="btn primary" id="runFree" type="button">Run Free Test</button>
+            <button class="btn pro hidden" id="runPro" type="button">Run Pro Test</button>
+            <button class="btn ghost" id="subscribe" type="button">Get Pro Subscription</button>
+            <span class="badge hidden" id="proBadge">Pro active</span>
+        </div>
+        <div aria-label="Loading" aria-live="polite" class="progress hidden" id="progress"><div class="bar"></div></div>
+        <div aria-live="polite" class="result hidden" id="freeResult"></div>
+
+        <!-- Save to profile (shown after a Pro run) -->
+        <div class="hidden" id="saveProfileWrap">
+            <div id="saveDropdown">
+                <button class="btn ghost" id="saveToProfileBtn" type="button">Save to profile ▾</button>
+                <div aria-label="Save to profile" class="hidden" id="saveToProfileMenu" role="menu"></div>
+            </div>
+            <span class="hidden" id="savedMsg">Saved</span>
+            <button class="btn ghost hidden" id="undoSaveBtn" type="button">Undo save</button>
+        </div>
+
+        <div class="hidden" id="proBlock" style="margin-top:12px">
+            <div class="card" style="margin-top:12px">
+                <strong>Full report</strong>
+                <div class="result" id="proFull" style="max-height:420px; overflow:auto;"></div>
+                <div style="margin-top:10px;">
+                    <button class="btn primary" id="downloadPdf">Download PDF</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Save-as-PDF prompt (overlay) -->
+    <div aria-labelledby="pdfPromptTitle"
+         aria-modal="true"
+         class="overlay"
+         id="pdfOverlay"
+         role="dialog">
+        <div class="modal" style="position:relative; padding:0;">
+            <div class="modal-content" style="padding:24px;">
+
+                <!-- CLOSE BUTTON OUTSIDE THE H3 -->
+                <button class="closex" id="pdfPromptClose" type="button">×</button>
+
+                <h3 id="pdfPromptTitle" style="margin-right:24px;">
+                    Save full report as PDF?
+                </h3>
+
+                <p>If you start a new run now, your current full report will disappear forever and cannot be retrieved.</p>
+
+                <div class="modal-actions"
+                     style="display:flex;justify-content:flex-end;gap:8px;margin-top:18px;">
+                    <!-- YES first, then NO -->
+                    <button class="btn primary" id="pdfPromptYes" type="button">Yes</button>
+                    <button class="btn ghost" id="pdfPromptNo" type="button">No</button>
+                </div>
+                <!-- Checkbox BELOW buttons, with text on the LEFT and checkbox on the RIGHT -->
+                <label class="inline-check"
+                       style="display:flex;
+              align-items:center;
+              justify-content:center;
+              gap:6px;
+              margin-top:14px;
+              font-size:13px;
+              white-space:nowrap;">
+                    <span>Don’t show this again (for this session)</span>
+                    <input type="checkbox" id="pdfPromptDontShow"
+                           style="transform:scale(0.8); width:14px; height:14px;" />
+                </label>
+
+            </div>
+        </div>
+    </div>
+    <aside class="grid" style="gap:14px">
+        <div class="card"><h3>Why AI is Better</h3><p>• Faster tests (down to 10 seconds)<br />• Allows for objective third-person assessment, no self-report bias<br />• High data capacity, increased accuracy</p></div>
+        <div class="card"><h3>Pro Subscription Perks</h3><p>• Stronger AI model<br />• 20 runs a month<br />• Analyze up to 1000 online post, higher accuracy<br />• Longer and more detailed reports (~1500 words)</p></div>
+        <div class="card">
+            <h3>User Tips</h3><p>• Use verified online profiles or answer a generated writing task in Write mode.<br />• Use source-account verification for online profile analyses.</p>
+            <p style="margin-top:8px"><a href="/help.html">More user tips</a></p>
+        </div>
+    </aside>
+</div>
+<footer>
+<span>© <span id="year"></span> One Click Personality</span>
+<div class="links">
+<a href="/about.html">About</a>
+<a href="/privacy.html">Privacy</a>
+<a href="/terms.html">Terms</a>
+<a href="/ethics.html">Ethics</a>
+<a href="/help.html">Help</a>
+<a href="/subscription.html">Subscription</a>
+</div>
+</footer>
+</div>
+<!-- Magic link modal -->
+<div aria-labelledby="authTitle" aria-modal="true" class="overlay" id="authOverlay" role="dialog">
+<div class="modal">
+<button aria-label="Close" class="closex" id="authClose">×</button>
+<h3 id="authTitle">Sign in</h3>
+<p>We’ll email you a one-time sign-in link.</p>
+<div class="oauth">
+<a class="btn ghost" href="/auth/google"><img alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18'%3E%3Cpath fill='%234285F4' d='M9 3.48c1.69 0 3.22.58 4.42 1.71l3.31-3.31C14.67.64 11.99 0 9 0 5.48 0 2.44 1.64.5 4.1l3.73 2.9C5.11 5.09 6.9 3.48 9 3.48z'/%3E%3Cpath fill='%2334A853' d='M17.64 9.2c0-.74-.07-1.45-.2-2.13H9v4.03h4.84c-.21 1.1-.84 2.03-1.79 2.66l2.73 2.12c1.6-1.48 2.86-3.68 2.86-6.68z'/%3E%3Cpath fill='%23FBBC05' d='M3.23 10.2c-.19-.56-.3-1.16-.3-1.77s.11-1.21.3-1.77L-.5 3.9C-1.17 5.22-1.55 6.77-1.55 8.43S-1.17 11.65-.5 12.97l3.73-2.9z' transform='translate(4.55 0)'/%3E%3Cpath fill='%23EA4335' d='M9 18c2.43 0 4.47-.8 5.96-2.16l-2.73-2.12c-.76.51-1.73.82-3.23.82-2.1 0-3.89-1.61-4.77-3.82L.5 12.97C2.44 15.36 5.48 18 9 18z'/%3E%3C/svg%3E"/> Continue with Google</a>
+<a class="btn ghost" href="/auth/facebook"><img alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18'%3E%3Cpath fill='%231877F2' d='M10.78 18v-7.8h2.62l.39-3.04h-3.01V5.07c0-.88.24-1.48 1.51-1.48h1.61V.12C13.6.08 12.74 0 11.74 0 9.5 0 7.95 1.49 7.95 4.23v2.36H5.33V9.63h2.62V18h2.83z'/%3E%3C/svg%3E"/> Continue with Facebook</a>
+</div>
+<div class="hr">or use email</div>
+<label>Email</label>
+<input id="magicEmail" placeholder="you@example.com" type="email"/>
+<button class="btn primary" id="sendMagic" style="margin-top:10px">Email me a sign-in link</button>
+<p class="hint">Didn’t get it? <a href="#" id="resend">Resend</a></p>
+<p id="authMsg" style="color:#0f172a;margin-top:8px;"></p>
+</div>
+</div>
+
+<!-- Create new profile modal (used by "Save to profile") -->
+<div aria-labelledby="profileTitle" aria-modal="true" class="overlay" id="profileOverlay" role="dialog">
+  <div class="modal">
+    <button aria-label="Close" class="closex" id="profileClose">×</button>
+    <h3 id="profileTitle">Create new profile</h3>
+    <p>Enter a name for this profile.</p>
+    <label>Profile name</label>
+    <input id="profileNameInput" placeholder="e.g., John (2025)" type="text" />
+    <div style="display:flex; gap:10px; margin-top:12px;">
+      <button class="btn ghost" id="profileCancel" type="button">Cancel</button>
+      <button class="btn primary" id="profileCreate" type="button">Create</button>
+    </div>
+    <p class="hint" id="profileMsg" style="margin-top:10px;"></p>
+  </div>
+</div>
+
+
+
+<!-- Custom category modal (used by "Save to profile" for Custom runs) -->
+<div aria-labelledby="customCategoryTitle" aria-modal="true" class="overlay" id="customCategoryOverlay" role="dialog">
+  <div class="modal">
+    <button aria-label="Close" class="closex" id="customCategoryClose">×</button>
+    <h3 id="customCategoryTitle">Save Custom test</h3>
+    <p>Choose an existing Custom test category or create a new one for this profile.</p>
+    <div class="customCategoryChoice">
+      <label for="customCategorySelect">Existing Custom category</label>
+      <select id="customCategorySelect"></select>
+      <div class="small">Or create a new Custom category:</div>
+      <input id="customCategoryInput" placeholder="e.g., Attachment style notes" type="text" maxlength="120" />
+    </div>
+    <div style="display:flex; gap:10px; margin-top:14px; justify-content:flex-end;">
+      <button class="btn ghost" id="customCategoryCancel" type="button">Cancel</button>
+      <button class="btn primary" id="customCategorySave" type="button">Save</button>
+    </div>
+    <p class="hint" id="customCategoryMsg" style="margin-top:10px;"></p>
+  </div>
+</div>
+
+<!-- Undo save modal (used by "Undo save") -->
+<div aria-labelledby="undoTitle" aria-modal="true" class="overlay" id="undoOverlay" role="dialog">
+  <div class="modal">
+    <button aria-label="Close" class="closex" id="undoClose">×</button>
+    <h3 id="undoTitle">Undo save</h3>
+    <p>Are you sure? This will undo your save.</p>
+    <div style="display:flex; gap:10px; margin-top:12px; justify-content:flex-end;">
+      <button class="btn primary" id="undoConfirm" type="button">Undo</button>
+      <button class="btn ghost" id="undoCancel" type="button">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Delete draft modal -->
+<div aria-labelledby="deleteDraftTitle" aria-modal="true" class="overlay" id="deleteDraftOverlay" role="dialog">
+  <div class="modal">
+    <button aria-label="Close" class="closex" id="deleteDraftClose" type="button">×</button>
+    <h3 id="deleteDraftTitle">Delete draft?</h3>
+    <p>This will permanently delete the selected writing draft from this browser.</p>
+    <div style="display:flex; gap:10px; margin-top:12px; justify-content:flex-end;">
+      <button class="btn danger" id="deleteDraftConfirm" type="button">Delete draft</button>
+      <button class="btn ghost" id="deleteDraftCancel" type="button">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script src="descriptions.js"></script>
+<script>
+    const $ = s => document.querySelector(s);
+    
+// === Model descriptions (loaded from descriptions.js) ===
+function updateTestBlurb() {
+  const sel = document.getElementById('testId');
+  const target = document.getElementById('testBlurbText');
+  const map = (window.TEST_DESCRIPTIONS || {});
+  const key = sel?.value || '';
+  target.textContent = map[key] || '';
+}
+document.addEventListener('change', (e) => {
+  if (e.target && e.target.id === 'testId') { updateTestBlurb(); }
+});
+document.addEventListener('DOMContentLoaded', updateTestBlurb);
+
+function animateFrameworkInfoPanel() {
+  const panel = document.getElementById('frameworkInfoPanel');
+  if (!panel) return;
+  panel.classList.remove('is-revealing');
+  void panel.offsetWidth;
+  panel.classList.add('is-revealing');
+}
+function syncFrameworkInfoPosition() {
+  const wrap = document.querySelector('.wrap');
+  const panel = document.getElementById('frameworkInfoPanel');
+  if (!wrap || !panel) return;
+
+  const desktopLayout = window.matchMedia('(min-width: 1660px)').matches;
+  if (!desktopLayout) {
+    wrap.style.removeProperty('--framework-info-top');
+    wrap.style.removeProperty('--framework-info-left');
+    wrap.style.removeProperty('--framework-info-width');
+    wrap.style.removeProperty('--framework-info-gap');
+    return;
+  }
+
+  const wrapRect = wrap.getBoundingClientRect();
+  const hero = document.querySelector('.hero');
+  const heroRect = hero ? hero.getBoundingClientRect() : null;
+  const topbar = document.querySelector('.topbar');
+  const topbarRect = topbar ? topbar.getBoundingClientRect() : null;
+  const fallbackTopOffset = 16;
+  const panelTop = heroRect
+    ? Math.max(0, heroRect.top - wrapRect.top)
+    : (topbarRect ? Math.max(0, (topbarRect.top - wrapRect.top) + fallbackTopOffset) : fallbackTopOffset);
+  const viewportPadding = 20;
+  const preferredWidth = 280;
+  const minimumWidth = 220;
+  const preferredGap = 16;
+  const minimumGap = 8;
+  const availableLeft = Math.max(0, wrapRect.left - viewportPadding);
+
+  let width = Math.min(preferredWidth, Math.max(minimumWidth, availableLeft - preferredGap));
+  let gap = Math.min(preferredGap, Math.max(minimumGap, availableLeft - width));
+
+  if (width + gap > availableLeft) {
+    gap = minimumGap;
+    width = Math.max(180, availableLeft - gap);
+  }
+
+  const panelLeft = viewportPadding - wrapRect.left;
+
+  wrap.style.setProperty('--framework-info-top', `${panelTop}px`);
+  wrap.style.setProperty('--framework-info-left', `${panelLeft}px`);
+  wrap.style.setProperty('--framework-info-width', `${Math.max(180, width)}px`);
+  wrap.style.setProperty('--framework-info-gap', `${Math.max(minimumGap, gap)}px`);
+}
+function updateFrameworkInfo() {
+  const sel = document.getElementById('testId');
+  const target = document.getElementById('frameworkInfoContent');
+  const map = (window.TEST_INFO_CONTENT || {});
+  if (!sel || !target) return;
+  const key = sel.value || '';
+  target.innerHTML = map[key] || '<p>Testing testing 1 2 3. Testing testing 1 2 3. Testing testing 1 2 3.</p><p>Testing testing 1 2 3. Testing testing 1 2 3. Testing testing 1 2 3.</p>';
+  target.scrollTop = 0;
+  syncFrameworkInfoPosition();
+  animateFrameworkInfoPanel();
+}
+document.addEventListener('change', (e) => {
+  if (e.target && e.target.id === 'testId') { updateFrameworkInfo(); }
+});
+document.addEventListener('DOMContentLoaded', () => {
+  updateFrameworkInfo();
+  syncFrameworkInfoPosition();
+});
+window.addEventListener('resize', syncFrameworkInfoPosition);
+function enforceAgeConfirm(){
+  const ids=['runFree','runPro'];
+  ids.forEach(id=>{
+    const el=document.getElementById(id);
+    if(el){
+      el.disabled=false;
+      el.classList.remove('disabled');
+      el.title='';
+    }
+  });
+}
+document.addEventListener('DOMContentLoaded', enforceAgeConfirm);
+
+let mode = 'web';
+    function switchMode(next){
+      mode = next;
+      document.getElementById('webMode').classList.toggle('hidden', mode!=='web');
+      document.getElementById('textMode').classList.toggle('hidden', mode!=='text');
+      document.getElementById('modeWeb').classList.toggle('active', mode==='web');
+      document.getElementById('modeText').classList.toggle('active', mode==='text');
+    }
+    document.getElementById('modeWeb').onclick=()=>switchMode('web');
+    document.getElementById('modeText').onclick=()=>switchMode('text');
+    switchMode('web');
+
+    const WRITE_TASKS = [
+      { id:'free_time_ranked', category:'preferences', text:'Tell us 10 things you like to do in your free time, listed in order from what you like to do most to least. Add a sentence or two explaining why each one matters to you.' },
+      { id:'ideal_day', category:'preferences', text:'Describe your ideal ordinary day from morning to evening. Include what you would do, who you would spend time with, and what would make it satisfying.' },
+      { id:'decision_story', category:'decisions', text:'Describe a meaningful decision you made recently. Explain what options you considered, what mattered most to you, and how you felt about the outcome.' },
+      { id:'values_priorities', category:'decisions', text:'List 8 values or priorities that matter to you. For each one, write why it matters and how it shows up in your choices.' },
+      { id:'learning_style', category:'learning', text:'Write about something you learned or tried to improve at. Explain what motivated you, what was difficult, and what helped you make progress.' },
+      { id:'work_collaboration', category:'work', text:'Describe how you prefer to work with other people on a shared task. Include what you appreciate, what frustrates you, and what role you usually take.' },
+      { id:'conflict_response', category:'stress', text:'Describe a disagreement or conflict in general terms. Explain how you usually react, what you try to protect, and what you wish you handled better.' },
+      { id:'stress_recovery', category:'stress', text:'Describe what you are like when stressed and what helps you recover. Give concrete examples of behaviors, thoughts, and routines.' },
+      { id:'creative_problem', category:'creativity', text:'Describe a problem you solved creatively or a time you had to improvise. Explain your thought process and what you learned from it.' },
+      { id:'future_self', category:'creativity', text:'Write a letter to your future self about what you want to become better at over the next year and why those changes matter to you.' }
+    ];
+    const WRITE_DRAFT_STORAGE_KEY = 'ocpWriteDraftsV1';
+    let copiedFromWriteField = '';
+    function currentWriteTask(){
+      const id = $('#writeTaskId')?.value || '';
+      const text = $('#writeTaskText')?.value || '';
+      const category = $('#writeTaskCategoryValue')?.value || '';
+      return id && text ? { id, text, category } : null;
+    }
+    function setWriteTask(task){
+      if (!task) return;
+      if ($('#writeTaskId')) $('#writeTaskId').value = task.id || '';
+      if ($('#writeTaskText')) $('#writeTaskText').value = task.text || '';
+      if ($('#writeTaskCategoryValue')) $('#writeTaskCategoryValue').value = task.category || '';
+      const box = $('#writeTaskBox');
+      if (box) box.textContent = task.text || '';
+    }
+    function generateWriteTask(event){
+      const btn = $('#generateWriteTask');
+      const wrap = btn?.closest('.writeGenerateWrap');
+      if (btn) btn.disabled = true;
+      if (wrap) {
+        const rect = wrap.getBoundingClientRect();
+        const x = event && Number.isFinite(event.clientX) ? event.clientX - rect.left : rect.width / 2;
+        const y = event && Number.isFinite(event.clientY) ? event.clientY - rect.top : rect.height / 2;
+        wrap.style.setProperty('--cloud-x', `${Math.max(8, Math.min(rect.width - 8, x))}px`);
+        wrap.style.setProperty('--cloud-y', `${Math.max(8, Math.min(rect.height - 8, y))}px`);
+        wrap.classList.remove('is-spinning');
+        wrap.classList.add('is-clouding');
+      }
+      window.setTimeout(() => {
+        if (wrap) {
+          wrap.classList.remove('is-clouding');
+          wrap.classList.add('is-spinning');
+        }
+      }, 1150);
+      window.setTimeout(() => {
+        const selectedCategory = $('#writeTaskCategory')?.value || 'all';
+        const taskPool = selectedCategory === 'all' ? WRITE_TASKS : WRITE_TASKS.filter(t => t.category === selectedCategory);
+        const pool = taskPool.length ? taskPool : WRITE_TASKS;
+        const task = pool[Math.floor(Math.random() * pool.length)];
+        setWriteTask(task);
+        if ($('#writeDraftId')) $('#writeDraftId').value = '';
+        if ($('#draftStatus')) $('#draftStatus').textContent = '';
+        if (wrap) wrap.classList.remove('is-clouding','is-spinning');
+        if (btn) btn.disabled = false;
+      }, 4550);
+    }
+    function loadWriteDrafts(){
+      try {
+        const parsed = JSON.parse(localStorage.getItem(WRITE_DRAFT_STORAGE_KEY) || '[]');
+        return Array.isArray(parsed) ? parsed.filter(d => d && d.id && d.text && d.taskText) : [];
+      } catch { return []; }
+    }
+    function saveWriteDrafts(drafts){
+      localStorage.setItem(WRITE_DRAFT_STORAGE_KEY, JSON.stringify((drafts || []).slice(0, 50)));
+    }
+    function refreshDraftSelect(){
+      const sel = $('#savedDraftSelect');
+      if (!sel) return;
+      const drafts = loadWriteDrafts();
+      sel.innerHTML = '<option value="">--- ---</option>';
+      drafts.forEach(d => {
+        const opt = document.createElement('option');
+        opt.value = d.id;
+        const date = d.updatedAt ? new Date(d.updatedAt).toLocaleDateString() : '';
+        opt.textContent = `${d.title || 'Untitled draft'}${date ? ' — ' + date : ''}`;
+        sel.appendChild(opt);
+      });
+    }
+    function saveCurrentDraft(){
+      const task = currentWriteTask();
+      const text = $('#textInput')?.value || '';
+      const status = $('#draftStatus');
+      if (!task) { if (status) status.textContent = 'Generate a writing task first.'; return; }
+      if (!text.trim()) { if (status) status.textContent = 'Write something before saving.'; return; }
+      const drafts = loadWriteDrafts();
+      const existingId = $('#writeDraftId')?.value || '';
+      const id = existingId || `draft_${Date.now()}_${Math.random().toString(16).slice(2)}`;
+      const title = ($('#draftTitle')?.value || '').trim() || task.text.slice(0, 52);
+      const nextDraft = { id, title, taskId: task.id, taskText: task.text, taskCategory: task.category || '', text, updatedAt: new Date().toISOString() };
+      const filtered = drafts.filter(d => d.id !== id);
+      filtered.unshift(nextDraft);
+      saveWriteDrafts(filtered);
+      if ($('#writeDraftId')) $('#writeDraftId').value = id;
+      refreshDraftSelect();
+      if ($('#savedDraftSelect')) $('#savedDraftSelect').value = id;
+      if (status) status.textContent = 'Draft saved.';
+    }
+    function loadSelectedDraft(){
+      const id = $('#savedDraftSelect')?.value || '';
+      if (!id) return;
+      const draft = loadWriteDrafts().find(d => d.id === id);
+      if (!draft) return;
+      setWriteTask({ id: draft.taskId, text: draft.taskText, category: draft.taskCategory || '' });
+      if ($('#textInput')) $('#textInput').value = draft.text || '';
+      updateWriteWordCount();
+      if ($('#draftTitle')) $('#draftTitle').value = draft.title || '';
+      if ($('#writeDraftId')) $('#writeDraftId').value = draft.id || '';
+      if ($('#draftStatus')) $('#draftStatus').textContent = 'Draft loaded.';
+    }
+    let pendingDeleteDraftId = '';
+    function closeDeleteDraftModal(){
+      pendingDeleteDraftId = '';
+      $('#deleteDraftOverlay')?.classList.remove('show');
+    }
+    function askDeleteSelectedDraft(){
+      const id = $('#savedDraftSelect')?.value || '';
+      if (!id) return;
+      pendingDeleteDraftId = id;
+      $('#deleteDraftOverlay')?.classList.add('show');
+    }
+    function confirmDeleteSelectedDraft(){
+      const id = pendingDeleteDraftId || $('#savedDraftSelect')?.value || '';
+      if (!id) return;
+      const drafts = loadWriteDrafts().filter(d => d.id !== id);
+      saveWriteDrafts(drafts);
+      if ($('#writeDraftId')?.value === id) $('#writeDraftId').value = '';
+      refreshDraftSelect();
+      closeDeleteDraftModal();
+      if ($('#draftStatus')) $('#draftStatus').textContent = 'Draft deleted.';
+    }
+    function countWriteWords(value){
+      return String(value || '').trim().split(/\s+/).filter(Boolean).length;
+    }
+    function updateWriteWordCount(){
+      const el = $('#writeWordCount');
+      const textarea = $('#textInput');
+      if (!el || !textarea) return;
+      const count = countWriteWords(textarea.value);
+      el.textContent = `${count} ${count === 1 ? 'word' : 'words'}` + (count >= 40 ? ' ✓' : '');
+    }
+
+    function setupWriteEditorGuards(){
+      const textarea = $('#textInput');
+      if (!textarea) return;
+      textarea.addEventListener('copy', () => { copiedFromWriteField = String(textarea.value || '').slice(textarea.selectionStart || 0, textarea.selectionEnd || 0); });
+      textarea.addEventListener('cut', () => { copiedFromWriteField = String(textarea.value || '').slice(textarea.selectionStart || 0, textarea.selectionEnd || 0); });
+      textarea.addEventListener('paste', (e) => {
+        const pasted = e.clipboardData?.getData('text') || '';
+        const warning = $('#writePasteWarning');
+        if (!pasted || !copiedFromWriteField || pasted !== copiedFromWriteField) {
+          e.preventDefault();
+          if (warning) warning.textContent = 'External paste is blocked in Write mode. Please write your own answer, or paste only text you copied from this field.';
+          return;
+        }
+        if (warning) warning.textContent = '';
+      });
+      textarea.addEventListener('input', () => {
+        if ($('#writePasteWarning')) $('#writePasteWarning').textContent = '';
+        updateWriteWordCount();
+      });
+      updateWriteWordCount();
+    }
+    $('#generateWriteTask')?.addEventListener('click', generateWriteTask);
+    $('#saveDraftBtn')?.addEventListener('click', saveCurrentDraft);
+    $('#loadDraftBtn')?.addEventListener('click', loadSelectedDraft);
+    $('#deleteDraftBtn')?.addEventListener('click', askDeleteSelectedDraft);
+    $('#deleteDraftConfirm')?.addEventListener('click', confirmDeleteSelectedDraft);
+    $('#deleteDraftCancel')?.addEventListener('click', closeDeleteDraftModal);
+    $('#deleteDraftClose')?.addEventListener('click', closeDeleteDraftModal);
+    refreshDraftSelect();
+    setupWriteEditorGuards();
+
+    let currentUser = null;
+    const LOGIN_NEW_SOURCE_VALUE = '__login_new__';
+    const YOUTUBE_CONTENT_CHECKBOXES = {
+      videos_posted: '#youtubeVideosPosted',
+      shorts_posted: '#youtubeShortsPosted',
+      playlists: '#youtubePlaylists'
+    };
+    function selectedYouTubeContentTypes(){
+      const out = [];
+      for (const [value, selector] of Object.entries(YOUTUBE_CONTENT_CHECKBOXES)) {
+        const el = $(selector);
+        if (el && el.checked && !el.disabled) out.push(value);
+      }
+      return out;
+    }
+    function syncSourceIncludeOptions(){
+      const provider = $('#sourceSite')?.value || 'reddit';
+      const isYouTube = provider === 'youtube';
+      $('#genericIncludeOptions')?.classList.toggle('hidden', isYouTube);
+      $('#youtubeIncludeOptions')?.classList.toggle('hidden', !isYouTube);
+      if (isYouTube) {
+        const anyChecked = selectedYouTubeContentTypes().length > 0;
+        if (!anyChecked) {
+          const videos = $('#youtubeVideosPosted');
+          const shorts = $('#youtubeShortsPosted');
+          if (videos) videos.checked = true;
+          if (shorts) shorts.checked = true;
+        }
+      }
+    }
+    function selectedOptionText(select){
+      const opt = select?.selectedOptions?.[0];
+      return String(opt?.dataset?.label || opt?.textContent || '').trim();
+    }
+    function selectedSourceAccountLabel(){ return selectedOptionText($('#profileName')); }
+    function sourceSiteName(){ return selectedOptionText($('#sourceSite')); }
+    function syncSourceDateFields(){
+      const custom = $('#timePeriod')?.value === 'custom';
+      $('#sourceDateRange')?.classList.toggle('hidden', !custom);
+    }
+    function setSourceAccountOptions(accounts){
+      const sel = $('#profileName');
+      if (!sel) return;
+      const list = accounts || [];
+      sel.innerHTML = '';
+      if (!list.length){
+        const empty = document.createElement('option');
+        empty.value = '';
+        empty.dataset.label = '';
+        empty.textContent = 'No verified users yet';
+        empty.disabled = true;
+        empty.selected = true;
+        sel.appendChild(empty);
+      }
+      list.forEach(acc => {
+        const opt = document.createElement('option');
+        opt.value = acc.id;
+        opt.dataset.label = acc.display_name || acc.username || acc.id;
+        opt.dataset.username = acc.username || '';
+        opt.textContent = acc.display_name || acc.username || acc.id;
+        sel.appendChild(opt);
+      });
+      const login = document.createElement('option');
+      login.value = LOGIN_NEW_SOURCE_VALUE;
+      login.dataset.label = 'Login/verify new user';
+      login.textContent = 'Login/verify new user';
+      sel.appendChild(login);
+    }
+    async function loadSourceAccounts(){
+      const provider = $('#sourceSite')?.value || 'reddit';
+      if (!currentUser){
+        setSourceAccountOptions([]);
+        return;
+      }
+      try{
+        const res = await fetch(`/api/source-accounts?provider=${encodeURIComponent(provider)}`, { credentials:'include' });
+        if (!res.ok) throw new Error('Could not load accounts');
+        const data = await res.json();
+        setSourceAccountOptions(data.accounts || []);
+      }catch{
+        setSourceAccountOptions([]);
+      }
+    }
+    async function startSourceVerification(){
+      const provider = $('#sourceSite')?.value || 'reddit';
+      if (!currentUser){ openAuth('Sign in to verify a source account'); return; }
+      try{
+        const res = await fetch('/api/source-auth/start', { method:'POST', headers:{'Content-Type':'application/json'}, credentials:'include', body: JSON.stringify({ provider }) });
+        const data = await res.json().catch(() => ({}));
+        if (data.redirectUrl){ window.location.href = data.redirectUrl; return; }
+        if (data.manual){
+          const value = prompt(data.prompt || `Enter the ${sourceSiteName() || provider} profile identifier`);
+          if (!value) { await loadSourceAccounts(); return; }
+          const verifyRes = await fetch('/api/source-auth/manual', { method:'POST', headers:{'Content-Type':'application/json'}, credentials:'include', body: JSON.stringify({ provider, value }) });
+          const verifyData = await verifyRes.json().catch(() => ({}));
+          if (!verifyRes.ok) throw new Error(verifyData.error || 'Could not verify source account.');
+          await loadSourceAccounts();
+          const sel = $('#profileName');
+          if (sel && verifyData.account?.id) sel.value = verifyData.account.id;
+          alert(`${sourceSiteName() || provider} account verified.`);
+          return;
+        }
+        alert(data.error || `Verification for ${sourceSiteName() || provider} is not available yet.`);
+      }catch(e){ alert(e?.message || 'Could not start source verification.'); }
+    }
+    $('#sourceSite')?.addEventListener('change', () => { syncSourceIncludeOptions(); loadSourceAccounts(); });
+    $('#profileName')?.addEventListener('change', () => { if ($('#profileName')?.value === LOGIN_NEW_SOURCE_VALUE) startSourceVerification(); });
+    $('#timePeriod')?.addEventListener('change', syncSourceDateFields);
+    syncSourceDateFields();
+    setSourceAccountOptions([]);
+    syncSourceIncludeOptions();
+    (function showSourceAuthReturnMessage(){
+      try{
+        const url = new URL(window.location.href);
+        const status = url.searchParams.get('source_auth');
+        if (!status) return;
+        const provider = url.searchParams.get('provider') || '';
+        if (provider && $('#sourceSite')) $('#sourceSite').value = provider;
+        if (status === 'success') { loadSourceAccounts(); alert('Source account verified.'); }
+        if (status === 'error') alert(url.searchParams.get('message') || 'Source verification failed.');
+        url.searchParams.delete('source_auth');
+        url.searchParams.delete('provider');
+        url.searchParams.delete('account');
+        url.searchParams.delete('message');
+        window.history.replaceState({}, document.title, url.pathname + url.search + url.hash);
+      }catch{}
+    })();
+
+    function showProgress(s){ document.getElementById('progress').classList.toggle('hidden', !s); }
+    function syncPrivacyFilterControls(){
+      const enabled = $('#privacyFilterEnabled');
+      const modeSelect = $('#privacyFilterMode');
+      const modeWrap = $('#privacyFilterModeWrap');
+      const isEnabled = !!enabled?.checked;
+      if (modeSelect) modeSelect.disabled = !isEnabled;
+      if (modeWrap) modeWrap.classList.toggle('custom-disabled', !isEnabled);
+    }
+    $('#privacyFilterEnabled')?.addEventListener('change', syncPrivacyFilterControls);
+    syncPrivacyFilterControls();
+    function currentPrivacyFilterMode(){
+      const enabled = $('#privacyFilterEnabled');
+      if (!enabled || !enabled.checked) return 'off';
+      return $('#privacyFilterMode')?.value || 'server_regex';
+    }
+    function pseudonymizeTextBrowser(text){
+      let out = String(text || '');
+      const counters = new Map();
+      const seen = new Map();
+      function replacement(label, raw){
+        const key = `${label}:${String(raw || '').trim().toLowerCase()}`;
+        if (seen.has(key)) return seen.get(key);
+        const next = (counters.get(label) || 0) + 1;
+        counters.set(label, next);
+        const value = `${label} ${next}`;
+        seen.set(key, value);
+        return value;
+      }
+      function apply(regex, label){ out = out.replace(regex, (match) => replacement(label, match)); }
+      apply(/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/gi, 'Email');
+      apply(/\b(?:https?:\/\/|www\.)[^\s<>()]+/gi, 'URL');
+      apply(/(?<![\w@])@[A-Za-z0-9_.-]{2,30}\b/g, 'Handle');
+      apply(/\b(?:\+?\d[\d\s().-]{7,}\d)\b/g, 'Phone');
+      apply(/\b(?:\d{1,3}\.){3}\d{1,3}\b/g, 'IP Address');
+      apply(/\b(?:\d[ -]*?){13,19}\b/g, 'Number');
+      apply(/\b\d{4}-\d{2}-\d{2}\b/g, 'Date');
+      apply(/\b\d{1,2}[/.]\d{1,2}[/.]\d{2,4}\b/g, 'Date');
+      apply(/\b(?:api[_-]?key|token|secret|password|passwd|pwd)\s*[:=]\s*[^\s]+/gi, 'Secret');
+      out = out.replace(/\b(?:my friend|friend|brother|sister|mother|father|boss|colleague|coworker|teacher|professor|doctor|dr\.?|mr\.?|mrs\.?|ms\.?)\s+([A-Z][a-z]{2,}(?:\s+[A-Z][a-z]{2,}){0,2})\b/g, (match) => replacement('Person', match));
+      apply(/\b[A-Z][a-z]{2,}\s+[A-Z][a-z]{2,}(?:\s+[A-Z][a-z]{2,})?\b/g, 'Person');
+      const stats = {};
+      for (const value of seen.values()) {
+        const label = value.replace(/\s+\d+$/, '');
+        stats[label] = (stats[label] || 0) + 1;
+      }
+      return { text: out, stats };
+    }
+    async function preparePayloadForPrivacy(url, payload, files){
+      const next = { ...(payload || {}) };
+      next.privacyFilterMode = next.privacyFilterMode || currentPrivacyFilterMode();
+      next.privacyFilterApplied = next.privacyFilterApplied || 'false';
+      // Online-profile analyses are fetched and privacy-filtered on the server.
+      // The browser regex helper is intentionally dormant while paste/upload mode is hidden.
+      return { payload: next, files };
+    }
+    function readInputs(){
+      const profileSelect = $('#profileName');
+      const sourceAccountId = profileSelect?.value || '';
+      return {
+        testId: $('#testId').value,
+        mode,
+        sourceSite: $('#sourceSite')?.value?.trim(),
+        sourceSiteLabel: sourceSiteName(),
+        profileName: selectedSourceAccountLabel(),
+        sourceAccountId,
+        postLimit: $('#postLimit')?.value || '150',
+        timePeriod: $('#timePeriod')?.value || 'last_30_days',
+        fromDate: $('#fromDate')?.value || '',
+        toDate: $('#toDate')?.value || '',
+        sourceContentTypes: ($('#sourceSite')?.value === 'youtube') ? selectedYouTubeContentTypes() : [],
+        includeReplies: !!$('#includeReplies')?.checked,
+        includeReposts: !!$('#includeReposts')?.checked,
+        includeMediaCaptions: !!$('#includeMediaCaptions')?.checked,
+        text: $('#textInput')?.value?.trim(),
+        writeTaskId: $('#writeTaskId')?.value || '',
+        writeTask: $('#writeTaskText')?.value || '',
+        writeDraftId: $('#writeDraftId')?.value || '',
+        writeSelfConfirmed: !!$('#writeSelfConfirm')?.checked,
+        clarifications: $('#clarifications')?.value?.trim(),
+        privacyFilterMode: currentPrivacyFilterMode()
+      };
+    }
+    function validateWriteInputs(input){
+      if (mode !== 'text') return true;
+      const words = String(input.text || '').trim().split(/\s+/).filter(Boolean).length;
+      if (!input.writeTask) { alert('Generate a writing task before running the test.'); return false; }
+      if (!input.text || words < 40) { alert('Please write a fuller answer to the generated task before running the test. Aim for at least 40 words.'); return false; }
+      if (!input.writeSelfConfirmed) { alert('Please confirm that the answer was written by you and does not contain another identifiable person’s text without consent.'); return false; }
+      return true;
+    }
+    function formatPct(p){ if(typeof p!=='number'||isNaN(p)) return ''; const val=p>1?p:p*100; return Math.round(Math.max(0,Math.min(100,val)))+'%'; }
+
+    function ordinalSuffix(n){
+      const v = n % 100;
+      if (v >= 11 && v <= 13) return 'th';
+      switch (n % 10){
+        case 1: return 'st';
+        case 2: return 'nd';
+        case 3: return 'rd';
+        default: return 'th';
+      }
+    }
+    function formatPercentile(p){
+      if (typeof p !== 'number' || !isFinite(p)) return '';
+      const raw = p > 1 ? p : p * 100;
+      const n = Math.round(Math.max(0, Math.min(100, raw)));
+      return `${n}${ordinalSuffix(n)}`;
+    }
+
+    const SPIRAL_CANONICAL_BY_NUM = {
+      '1': '1 - Beige',
+      '2': '2 - Purple',
+      '3': '3 - Red',
+      '4': '4 - Blue',
+      '5': '5 - Orange',
+      '6': '6 - Green',
+      '7': '7 - Yellow',
+      '8': '8 - Turquoise',
+    };
+
+    function normalizeSpiralLabel(label){
+      const raw = String(label || '').trim();
+      if (!raw) return '';
+      const cleaned = raw.replace(/[–—]/g,'-').replace(/\s+/g,' ').trim();
+      const lower = cleaned.toLowerCase();
+
+      // Already canonical?
+      for (const v of Object.values(SPIRAL_CANONICAL_BY_NUM)){
+        if (v.toLowerCase() === lower) return v;
+      }
+
+      // Numeric prefix?
+      const m = cleaned.match(/^(?:stage\s*)?([1-8])\b/i);
+      if (m && SPIRAL_CANONICAL_BY_NUM[m[1]]) return SPIRAL_CANONICAL_BY_NUM[m[1]];
+
+      // Keyword match
+      if (lower.includes('beige')) return SPIRAL_CANONICAL_BY_NUM['1'];
+      if (lower.includes('purple')) return SPIRAL_CANONICAL_BY_NUM['2'];
+      if (lower.includes('red')) return SPIRAL_CANONICAL_BY_NUM['3'];
+      if (lower.includes('blue')) return SPIRAL_CANONICAL_BY_NUM['4'];
+      if (lower.includes('orange')) return SPIRAL_CANONICAL_BY_NUM['5'];
+      if (lower.includes('green')) return SPIRAL_CANONICAL_BY_NUM['6'];
+      if (lower.includes('yellow')) return SPIRAL_CANONICAL_BY_NUM['7'];
+      if (lower.includes('turquoise') || lower.includes('teal')) return SPIRAL_CANONICAL_BY_NUM['8'];
+
+      return cleaned;
+    }
+    function topLineLabel(testId){
+      return testId === 'big5' ? 'Percentile estimates' : 'Top estimates';
+    }
+    function formatTopLine(testId, topTypes){
+      const arr = Array.isArray(topTypes) ? topTypes : [];
+      const max = (testId === 'big5') ? 5 : 4;
+      return arr.slice(0, max)
+        .map(t => {
+          let label = (t && t.label) ? String(t.label) : '';
+          if (testId === 'spiral') label = normalizeSpiralLabel(label);
+          const val = (testId === 'big5') ? formatPercentile(Number(t?.probability)) : formatPct(Number(t?.probability));
+          return (label && val) ? `${label}: ${val}` : '';
+        })
+        .filter(Boolean)
+        .join(' • ');
+    }
+    function splitDominantLine(summary){ if(!summary) return {headline:'',body:''}; const parts = summary.split('\n'); const first = parts[0].trim(); const isHead=/^Dominant function:\s*\w+/i.test(first); return isHead?{headline:first, body:parts.slice(1).join('\n').trim()}:{headline:'',body:summary}; }
+
+    async function postJSONorMultipart(url, payload, files) {
+      const prepared = await preparePayloadForPrivacy(url, payload, files);
+      payload = prepared.payload;
+      files = prepared.files;
+      if (payload.mode === 'text' && (files?.length || (payload.text && payload.text.length))) {
+        const fd = new FormData(); for (const [k, v] of Object.entries(payload)) fd.append(k, v);
+        if (files) Array.from(files).forEach(f => fd.append('files', f));
+        const res = await fetch(url, { method: 'POST', body: fd, credentials:'include' });
+        if (!res.ok) throw new Error(JSON.stringify(await res.json()));
+        return res.json();
+      } else {
+        const res = await fetch(url, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload), credentials:'include' });
+        if (!res.ok) throw new Error(JSON.stringify(await res.json()));
+        return res.json();
+      }
+    }
+
+    function openAuth(reason){
+      $('#authOverlay').classList.add('show');
+      $('#authTitle').textContent = reason || 'Sign in';
+    }
+    function closeAuth(){ $('#authOverlay').classList.remove('show'); }
+    $('#authClose').onclick = closeAuth;
+    $('#loginBtn').onclick = () => openAuth('Sign in to continue');
+
+    // Magic link flows
+    $('#sendMagic').onclick = async () => {
+      const email = $('#magicEmail').value.trim();
+      const res = await fetch('/auth/magic/start', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ email }) });
+      const js = await res.json(); $('#authMsg').textContent = js.error || 'Check your email for the sign-in link.';
+    };
+    $('#resend').onclick = async (e) => { e.preventDefault(); const email = $('#magicEmail').value.trim(); await fetch('/auth/resend', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ email }) }); $('#authMsg').textContent = 'If your email exists, we re-sent the link.'; };
+
+    function showError(e){
+      try { const j = JSON.parse(e.message); if (j.require==='login') { openAuth('Sign in to continue'); return; } if (j.require==='subscribe'){ location.href='/subscription.html'; return; } alert(j.error || 'Request failed'); }
+      catch { alert(e.message || 'Request failed'); }
+    }
+
+    document.getElementById('runFree').onclick = () => {
+        maybePromptToSavePdf(async () => {
+            const files = document.getElementById('fileInput')?.files || [];
+            const input = readInputs();
+
+            // Free runs should never show the "Save to profile" control
+            hideSaveToProfile();
+
+            if (mode === 'web' && (!input.sourceSite || !input.sourceAccountId || input.sourceAccountId === LOGIN_NEW_SOURCE_VALUE)) {
+                alert('Please choose a verified source user, or use Login/verify new user first.');
+                return;
+            }
+            if (mode === 'web' && input.sourceSite === 'youtube' && !(input.sourceContentTypes || []).length) {
+                alert('Please choose at least one available YouTube content type: Videos posted, Shorts posted, or Playlists.');
+                return;
+            }
+            if (mode === 'text' && !validateWriteInputs(input)) {
+                return;
+            }
+
+            document.getElementById('freeResult').classList.add('hidden');
+            showProgress(true);
+            try {
+                const data = await postJSONorMultipart('/api/free-mbti', input, files);
+                const probs = formatTopLine(input.testId, data.top_types || []);
+                const probsLabel = topLineLabel(input.testId);
+                const { headline, body } = splitDominantLine(data.summary || '');
+                const finalSummary = data.summary
+                    ? [headline, body, (probs ? `${probsLabel}: ${probs}` : '')]
+                        .filter(Boolean).join('\n\n')
+                    : 'No summary.';
+                document.getElementById('freeResult').textContent = finalSummary;
+                document.getElementById('freeResult').classList.remove('hidden');
+            } catch (e) {
+                showError(e);
+            } finally {
+                showProgress(false);
+            }
+        });
+    };
+
+    let lastReportId = null;
+    let lastProPayload = null; // used by "Save to profile"
+    let lastSavedRunId = null; // used by "Undo save"
+    let lastProContext = null; // {source_site, profile_name, mode}
+    let suppressPdfPrompt = false; // keep this near your let lastReportId = null;
+let allowUnloadOnce = false; // suppress native beforeunload once after user confirms navigation
+
+    function hideSavedFeedback() {
+        const msg = document.getElementById('savedMsg');
+        const undo = document.getElementById('undoSaveBtn');
+        if (msg) {
+            msg.textContent = 'Saved';
+            msg.removeAttribute('title');
+            msg.classList.add('hidden');
+        }
+        if (undo) undo.classList.add('hidden');
+        lastSavedRunId = null;
+    }
+
+    function showSavedFeedback(profileDisplayName) {
+        const msg = document.getElementById('savedMsg');
+        const undo = document.getElementById('undoSaveBtn');
+        if (msg) {
+            msg.textContent = 'Saved';
+            msg.removeAttribute('title');
+            if (profileDisplayName) msg.title = `Saved to profile: ${profileDisplayName}`;
+            msg.classList.remove('hidden');
+        }
+        if (undo) undo.classList.remove('hidden');
+    }
+
+    function hideSaveToProfile() {
+        const wrap = document.getElementById('saveProfileWrap');
+        const menu = document.getElementById('saveToProfileMenu');
+        if (wrap) wrap.classList.add('hidden');
+        if (menu) menu.classList.add('hidden');
+        lastProPayload = null;
+        hideSavedFeedback();
+    }
+
+    async function safeReadJson(res) {
+        try { return await res.json(); } catch { return null; }
+    }
+
+    function openProfileModal() {
+        $('#profileMsg').textContent = '';
+        $('#profileNameInput').value = '';
+        $('#profileOverlay').classList.add('show');
+        setTimeout(() => $('#profileNameInput').focus(), 50);
+    }
+    function closeProfileModal() { $('#profileOverlay').classList.remove('show'); }
+    $('#profileClose').onclick = closeProfileModal;
+    $('#profileCancel').onclick = closeProfileModal;
+
+    function openUndoModal() {
+        const overlay = document.getElementById('undoOverlay');
+        if (overlay) overlay.classList.add('show');
+    }
+    function closeUndoModal() {
+        const overlay = document.getElementById('undoOverlay');
+        if (overlay) overlay.classList.remove('show');
+        const confirmBtn = document.getElementById('undoConfirm');
+        if (confirmBtn) {
+            confirmBtn.disabled = false;
+            confirmBtn.textContent = 'Undo';
+        }
+    }
+
+    // Undo save
+    const undoBtn = document.getElementById('undoSaveBtn');
+    if (undoBtn) undoBtn.onclick = () => { if (lastSavedRunId) openUndoModal(); };
+
+    const undoClose = document.getElementById('undoClose');
+    const undoCancel = document.getElementById('undoCancel');
+    if (undoClose) undoClose.onclick = closeUndoModal;
+    if (undoCancel) undoCancel.onclick = closeUndoModal;
+
+    const undoConfirm = document.getElementById('undoConfirm');
+    if (undoConfirm) undoConfirm.onclick = async () => {
+        const runId = lastSavedRunId;
+        if (!runId) { closeUndoModal(); return; }
+        undoConfirm.disabled = true;
+        undoConfirm.textContent = 'Undoing…';
+        try {
+            const res = await fetch(`/api/runs/${encodeURIComponent(runId)}`, { method: 'DELETE', credentials: 'include' });
+            if (!res.ok) {
+                const j = await safeReadJson(res);
+                throw new Error(JSON.stringify(j || { error: 'Request failed' }));
+            }
+            hideSavedFeedback();
+            closeUndoModal();
+        } catch (e) {
+            undoConfirm.disabled = false;
+            undoConfirm.textContent = 'Undo';
+            showError(e);
+        }
+    };
+
+
+    async function loadProfiles() {
+        const res = await fetch('/api/profiles', { credentials: 'include' });
+        if (!res.ok) {
+            const j = await safeReadJson(res);
+            throw new Error(JSON.stringify(j || { error: 'Request failed' }));
+        }
+        const data = await res.json();
+        return Array.isArray(data.profiles) ? data.profiles : [];
+    }
+
+    async function saveCurrentProRunToProfile(profileId) {
+        if (!lastProPayload) throw new Error(JSON.stringify({ error: 'No Pro run to save yet' }));
+        const res = await fetch(`/api/profiles/${encodeURIComponent(profileId)}/save`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({
+                ...(lastProPayload || {}),
+                run_source_kind: lastProContext?.run_source_kind || null,
+                run_source_detail: lastProContext?.run_source_detail || null
+            })
+        });
+        if (!res.ok) {
+            const j = await safeReadJson(res);
+            throw new Error(JSON.stringify(j || { error: 'Request failed' }));
+        }
+        return res.json();
+    }
+
+    function renderSaveMenu(profiles) {
+        const menu = document.getElementById('saveToProfileMenu');
+        if (!menu) return;
+        menu.innerHTML = '';
+
+        const mkItem = (text, onClick) => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.textContent = text;
+            btn.style.width = '100%';
+            btn.style.textAlign = 'left';
+            btn.style.padding = '10px 12px';
+            btn.style.background = '#fff';
+            btn.style.border = 'none';
+            btn.style.cursor = 'pointer';
+            btn.onmouseenter = () => { btn.style.background = '#f2f4f8'; };
+            btn.onmouseleave = () => { btn.style.background = '#fff'; };
+            btn.onclick = async () => {
+                try {
+                    menu.classList.add('hidden');
+                    await onClick();
+                } catch (e) {
+                    showError(e);
+                }
+            };
+            menu.appendChild(btn);
+        };
+
+        if (Array.isArray(profiles) && profiles.length) {
+            profiles.forEach(p => {
+                mkItem(p.display_name, async () => {
+                    const data = await saveCurrentProRunToProfile(p.id);
+                    lastSavedRunId = data?.saved_result_id || null;
+                    showSavedFeedback(p.display_name);
+                });
+            });
+
+            // divider
+            const hr = document.createElement('div');
+            hr.style.height = '1px';
+            hr.style.background = 'var(--border)';
+            menu.appendChild(hr);
+        }
+
+        mkItem('Create new profile', async () => {
+            openProfileModal();
+        });
+    }
+
+    async function openSaveDropdown() {
+        const wrap = document.getElementById('saveProfileWrap');
+        const menu = document.getElementById('saveToProfileMenu');
+        if (!wrap || !menu) return;
+        if (menu.classList.contains('hidden')) {
+            const profiles = await loadProfiles();
+            renderSaveMenu(profiles);
+            menu.classList.remove('hidden');
+        } else {
+            menu.classList.add('hidden');
+        }
+    }
+
+    $('#saveToProfileBtn').onclick = async () => {
+        try { await openSaveDropdown(); } catch (e) { showError(e); }
+    };
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+        const menu = document.getElementById('saveToProfileMenu');
+        const btn = document.getElementById('saveToProfileBtn');
+        if (!menu || menu.classList.contains('hidden')) return;
+        const inMenu = menu.contains(e.target);
+        const inBtn = btn && btn.contains(e.target);
+        if (!inMenu && !inBtn) menu.classList.add('hidden');
+    });
+
+    // Create profile (then save current Pro run into it)
+// Profiles created from this dropdown are user-defined and not tied to the "online profile" input fields.
+function toProfileKey(name) {
+    try {
+        return (name || '')
+            .trim()
+            .toLowerCase()
+            .normalize('NFKD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/^-+|-+$/g, '')
+            .slice(0, 80) || 'profile';
+    } catch {
+        // normalize() can throw on very old browsers; fall back gracefully.
+        return (name || '').trim().toLowerCase().slice(0, 80) || 'profile';
+    }
+}
+
+$('#profileCreate').onclick = async () => {
+    const name = $('#profileNameInput').value.trim();
+    $('#profileMsg').textContent = '';
+    if (!name) { $('#profileMsg').textContent = 'Please enter a profile name.'; return; }
+    try {
+        // Use a dedicated namespace for user-created profiles to avoid collisions
+        // with the "online profile" (sourceSite/profileName) input fields.
+        const source_site = 'profile';
+        const profile_name = toProfileKey(name);
+
+        const res = await fetch('/api/profiles', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({ display_name: name, source_site, profile_name })
+        });
+        if (!res.ok) {
+            const j = await safeReadJson(res);
+            throw new Error(JSON.stringify(j || { error: 'Request failed' }));
+        }
+        const data = await res.json();
+        const profile = data.profile;
+        if (!profile?.id) throw new Error(JSON.stringify({ error: 'Failed to create profile' }));
+
+        const saveRes = await saveCurrentProRunToProfile(profile.id);
+        lastSavedRunId = saveRes?.saved_result_id || null;
+        closeProfileModal();
+        showSavedFeedback(profile.display_name);
+    } catch (e) {
+        showError(e);
+    }
+};
+
+
+    function maybePromptToSavePdf(onContinue) {
+        // If there is no previous Pro report or user opted out, just run immediately
+        if (!lastReportId || suppressPdfPrompt) {
+            onContinue();
+            return;
+        }
+
+        const overlay = document.getElementById('pdfOverlay');
+        const yesBtn = document.getElementById('pdfPromptYes');
+        const noBtn = document.getElementById('pdfPromptNo');
+        const closeBtn = document.getElementById('pdfPromptClose');
+        const dont = document.getElementById('pdfPromptDontShow');
+
+        // If anything is missing, fail open
+        if (!overlay || !yesBtn || !noBtn || !closeBtn || !dont) {
+            onContinue();
+            return;
+        }
+
+        // Reset checkbox each time
+        dont.checked = false;
+
+        // Show centered overlay
+        overlay.classList.add('show');
+
+        const cleanup = () => {
+            overlay.classList.remove('show');
+            yesBtn.onclick = null;
+            noBtn.onclick = null;
+            closeBtn.onclick = null;
+        };
+
+        yesBtn.onclick = () => {
+            if (dont.checked) suppressPdfPrompt = true;
+            const reportId = lastReportId;
+            cleanup();
+            if (reportId) {
+                // Open PDF for the last Pro run
+                const tzOffset = new Date().getTimezoneOffset();
+            const locale = (navigator.language || 'en-GB');
+            window.location = `/api/pro-mbti/pdf/${reportId}?tzOffset=${encodeURIComponent(tzOffset)}&locale=${encodeURIComponent(locale)}`;
+            }
+            onContinue();
+        };
+
+        // Treat "No" as: don’t save PDF, just continue
+        noBtn.onclick = () => {
+            if (dont.checked) suppressPdfPrompt = true;
+            cleanup();
+            onContinue();
+        };
+
+        // Treat the X as cancel: just close the dialog
+        closeBtn.onclick = () => {
+            if (dont.checked) suppressPdfPrompt = true;
+            cleanup();
+            // NOTE: intentionally do NOT call onContinue() here;
+            // closing with X just dismisses the dialog.
+        };
+    }
+
+async function triggerDownload(url){
+    try {
+        const res = await fetch(url, { credentials: 'include' });
+        if (!res.ok) throw new Error(await res.text().catch(() => 'Download failed'));
+        const blob = await res.blob();
+        const objectUrl = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = objectUrl;
+        const disposition = res.headers.get('content-disposition') || '';
+        const match = disposition.match(/filename="?([^";]+)"?/i);
+        a.download = match ? match[1] : 'One-Click-Personality-Report.pdf';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(objectUrl), 60000);
+    } catch (e) {
+        console.error('[pdf download]', e);
+        window.location.href = url;
+    }
+}
+
+function shouldPromptToSavePdf(){
+    return !!lastReportId && !suppressPdfPrompt;
+}
+
+// Leaving / reloading / closing tab: browsers block custom modals here,
+// so we show the native "Leave site?" confirmation when a report would be lost.
+window.addEventListener('beforeunload', (e) => {
+    if (allowUnloadOnce) return;
+    if (!shouldPromptToSavePdf()) return;
+    e.preventDefault();
+    e.returnValue = '';
+});
+
+// Intercept same-window navigations (links + form submits) so we CAN show the custom PDF prompt.
+document.addEventListener('click', (e) => {
+    const a = e.target?.closest?.('a[href]');
+    if (!a) return;
+
+    // Ignore new-tab/window links, downloads, and in-page anchors.
+    if (a.target && a.target !== '_self') return;
+    if (a.hasAttribute('download')) return;
+    const href = a.getAttribute('href') || '';
+    if (href.startsWith('#') || href.startsWith('javascript:')) return;
+
+    if (!shouldPromptToSavePdf()) return;
+
+    e.preventDefault();
+    const url = a.href;
+    maybePromptToSavePdf(() => {
+        allowUnloadOnce = true;
+        setTimeout(() => { allowUnloadOnce = false; }, 2000);
+        window.location.href = url;
+    });
+}, true);
+
+document.addEventListener('submit', (e) => {
+    const form = e.target;
+    if (!form || !shouldPromptToSavePdf()) return;
+
+    // If the form would navigate away, prompt first.
+    e.preventDefault();
+
+    const action = form.getAttribute('action') || window.location.href;
+    const method = (form.getAttribute('method') || 'get').toLowerCase();
+
+    maybePromptToSavePdf(() => {
+        if (method === 'get') {
+            const url = new URL(action, window.location.href);
+            const params = new URLSearchParams(new FormData(form));
+            url.search = params.toString();
+            allowUnloadOnce = true;
+            setTimeout(() => { allowUnloadOnce = false; }, 2000);
+            window.location.href = url.toString();
+} else {
+            // POST navigations will still trigger beforeunload; allow it after prompt
+            allowUnloadOnce = true;
+            setTimeout(() => { allowUnloadOnce = false; }, 2000);
+            form.submit();
+}
+    });
+}, true);
+
+    document.getElementById('runPro').onclick = () => {
+    maybePromptToSavePdf(async () => {
+      const files = document.getElementById('fileInput')?.files || [];
+      const input = readInputs();
+
+      // Reset save UI for this new run
+      hideSaveToProfile();
+      if (mode === 'web' && (!input.sourceSite || !input.sourceAccountId || input.sourceAccountId === LOGIN_NEW_SOURCE_VALUE)) return alert('Please choose a verified source user, or use Login/verify new user first.');
+      if (mode === 'web' && input.sourceSite === 'youtube' && !(input.sourceContentTypes || []).length) return alert('Please choose at least one available YouTube content type: Videos posted, Shorts posted, or Playlists.');
+      if (mode === 'text' && !validateWriteInputs(input)) return;
+      document.getElementById('proBlock').classList.remove('hidden');
+      document.getElementById('freeResult').classList.remove('hidden');
+      document.getElementById('freeResult').textContent = 'Analyzing…';
+      document.getElementById('proFull').textContent = '';
+      showProgress(true);
+      try {
+        const data = await postJSONorMultipart('/api/pro-mbti', input, files);
+        const { headline: h2, body: b2 } = splitDominantLine(data.summary || '');
+        const probs = formatTopLine(input.testId, data.top_types || []);
+        const probsLabel = topLineLabel(input.testId);
+        const topEstimatesLine = probs ? `${probsLabel}: ${probs}` : '';
+        document.getElementById('freeResult').textContent = [h2, b2, topEstimatesLine].filter(Boolean).join('\n\n');
+        document.getElementById('proFull').textContent = [topEstimatesLine, data.full_report || ''].filter(Boolean).join('\n\n');
+        lastReportId = data.reportId;
+
+        // Enable "Save to profile" dropdown for the current Pro run
+        lastProPayload = {
+            testId: input.testId,
+            summary: data.summary || '',
+            top_types: data.top_types || [],
+            full_report: data.full_report || '',
+            citations: data.citations || []
+        };
+        const runSourceKind = mode === 'web' ? 'source_api' : ((files && files.length) ? 'file' : 'text');
+        let runSourceDetail = '';
+        if (runSourceKind === 'source_api') runSourceDetail = JSON.stringify({ sourceSite: input.sourceSite || '', sourceSiteLabel: input.sourceSiteLabel || '', profileName: input.profileName || '', sourceAccountId: input.sourceAccountId || '', postLimit: input.postLimit || '', timePeriod: input.timePeriod || '', fromDate: input.fromDate || '', toDate: input.toDate || '', includeReplies: !!input.includeReplies, includeReposts: !!input.includeReposts, includeMediaCaptions: !!input.includeMediaCaptions, sourceContentTypes: input.sourceContentTypes || [], privacyFilterMode: input.privacyFilterMode || 'off' });
+        if (runSourceKind === 'file') {
+            try { runSourceDetail = JSON.stringify(Array.from(files).map(f => (f && f.name) ? String(f.name) : '').filter(Boolean)); }
+            catch { runSourceDetail = ''; }
+        }
+        lastProContext = {
+            source_site: (input.sourceSite || '').trim(),
+            profile_name: (input.profileName || '').trim(),
+            mode: mode,
+            run_source_kind: runSourceKind,
+            run_source_detail: runSourceDetail
+        };
+        const wrap = document.getElementById('saveProfileWrap');
+        if (wrap) wrap.classList.remove('hidden');
+      } catch (e) { showError(e); } finally { showProgress(false); }
+    
+    });
+};
+    document.getElementById('downloadPdf').onclick = async () => {
+      if (!lastReportId) { alert('No Pro report yet.'); return; }
+      const tzOffset = new Date().getTimezoneOffset();
+      const locale = (navigator.language || 'en-GB');
+      await triggerDownload(`/api/pro-mbti/pdf/${lastReportId}?tzOffset=${encodeURIComponent(tzOffset)}&locale=${encodeURIComponent(locale)}`);
+    };
+
+    async function refreshMe(){
+      const r = await fetch('/api/auth/me', { credentials:'include' });
+      const data = await r.json(); const user = data.user;
+      currentUser = user || null;
+      $('#acctEmail').classList.toggle('hidden', !user);
+      $('#logoutBtn').classList.toggle('hidden', !user);
+      $('#loginBtn').classList.toggle('hidden', !!user);
+      $('#settingsBtn').classList.toggle('hidden', !user);
+      if (user) {
+        $('#acctEmail').textContent = user.email + (user.active ? ' (Pro)' : '');
+        $('#proBadge').classList.toggle('hidden', !user.active);
+        $('#runPro').classList.toggle('hidden', !user.active);
+        $('#subscribe').classList.toggle('hidden', !!user.active);
+      } else {
+        $('#proBadge').classList.add('hidden');
+        $('#runPro').classList.add('hidden');
+        $('#subscribe').classList.remove('hidden');
+      }
+      await loadSourceAccounts();
+    }
+    function clearIndexRunState(){
+      lastReportId = null;
+      lastProPayload = null;
+      lastSavedRunId = null;
+      lastProContext = null;
+      suppressPdfPrompt = false;
+      allowUnloadOnce = false;
+
+      document.getElementById('pdfOverlay')?.classList.remove('show');
+      document.getElementById('saveToProfileMenu')?.classList.add('hidden');
+      hideSaveToProfile();
+
+      const freeResult = document.getElementById('freeResult');
+      if (freeResult) {
+        freeResult.textContent = '';
+        freeResult.classList.add('hidden');
+      }
+
+      const proBlock = document.getElementById('proBlock');
+      if (proBlock) proBlock.classList.add('hidden');
+
+      const proFull = document.getElementById('proFull');
+      if (proFull) proFull.textContent = '';
+
+      showProgress(false);
+    }
+
+    $('#logoutBtn').onclick = () => {
+      const doLogout = async () => {
+        await fetch('/auth/logout', { method:'POST', credentials:'include' });
+        clearIndexRunState();
+        refreshMe();
+      };
+      if (!shouldPromptToSavePdf()) { doLogout(); return; }
+      maybePromptToSavePdf(() => { setTimeout(doLogout, 400); });
+    };
+    $('#subscribe').onclick = async () => { location.href = '/subscription.html'; };
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+    refreshMe();
+  </script>
+
+<style id="index-top-hue-final-v4">
+html[data-theme="dark"]{
+  background:var(--bg) !important;
+  background-repeat:no-repeat !important;
+  background-attachment:scroll !important;
+}
+html[data-theme="dark"] body{
+  background:
+    radial-gradient(900px 600px at -12% 0%, rgba(103,179,255,.18), transparent 55%),
+    radial-gradient(900px 600px at 112% 0%, rgba(103,179,255,.18), transparent 55%),
+    var(--bg) !important;
+  background-repeat:no-repeat !important;
+  background-attachment:scroll !important;
+}
+</style>
+
+
+
+
+<style id="index-top-hue-final-v5">
+html[data-theme="dark"] body{
+  background:
+    linear-gradient(to bottom, rgba(103,179,255,.055) 0, rgba(103,179,255,.028) 56px, rgba(103,179,255,0) 180px),
+    radial-gradient(900px 600px at -12% 0%, rgba(103,179,255,.18), transparent 55%),
+    radial-gradient(900px 600px at 112% 0%, rgba(103,179,255,.18), transparent 55%),
+    var(--bg) !important;
+  background-repeat:no-repeat !important;
+  background-attachment:scroll !important;
+}
+</style>
+
+
+
+<style id="index-top-hue-final-v6">
+html[data-theme="dark"]{
+  background:
+    linear-gradient(to bottom, rgba(103,179,255,.055) 0, rgba(103,179,255,.028) 56px, rgba(103,179,255,0) 180px),
+    radial-gradient(900px 600px at -12% 0%, rgba(103,179,255,.18), transparent 55%),
+    radial-gradient(900px 600px at 112% 0%, rgba(103,179,255,.18), transparent 55%),
+    var(--bg) !important;
+  background-repeat:no-repeat !important;
+  background-attachment:scroll !important;
+}
+html[data-theme="dark"] body{
+  background:transparent !important;
+}
+</style>
+
+
+<style id="index-top-hue-light-final-v1">
+html:not([data-theme="dark"]){
+  background:
+    linear-gradient(to bottom, rgba(103,179,255,.055) 0, rgba(103,179,255,.028) 56px, rgba(103,179,255,0) 180px),
+    radial-gradient(900px 600px at -12% 0%, rgba(103,179,255,.18), transparent 55%),
+    radial-gradient(900px 600px at 112% 0%, rgba(103,179,255,.18), transparent 55%),
+    var(--bg) !important;
+  background-repeat:no-repeat !important;
+  background-attachment:scroll !important;
+}
+html:not([data-theme="dark"]) body{
+  background:transparent !important;
+}
+</style>
+
+
+
+<!-- Appended patch: keep the framework info sidebar outside the test card at slightly narrower desktop widths, and make its text a bit smaller. -->
+<style id="framework-sidebar-narrow-window-fix-v1">
+.framework-rich-content{
+  font-size:13.5px !important;
+  line-height:1.58 !important;
+}
+.framework-rich-content p{
+  margin-bottom:12px !important;
+}
+@media (min-width:1560px) and (max-width:1659px){
+  .framework-rich-panel{
+    position:absolute !important;
+    top:var(--framework-info-top) !important;
+    left:var(--framework-info-left) !important;
+    width:var(--framework-info-width) !important;
+    bottom:auto !important;
+    z-index:1 !important;
+    margin-top:0 !important;
+    min-width:0 !important;
+    padding:0 !important;
+    background:transparent !important;
+    border:none !important;
+    box-shadow:none !important;
+  }
+  .framework-rich-content{
+    max-height:none !important;
+    height:auto !important;
+    overflow:visible !important;
+    padding:0 12px 40px 0 !important;
+  }
+}
+</style>
+<script id="framework-sidebar-narrow-window-fix-v1-script">
+(function(){
+  const SIDEBAR_MIN_VIEWPORT = 1560;
+  const VIEWPORT_PADDING = 20;
+  const PREFERRED_WIDTH = 280;
+  const MINIMUM_WIDTH = 220;
+  const PREFERRED_GAP = 16;
+  const MINIMUM_GAP = 8;
+
+  const originalSyncFrameworkInfoPosition = window.syncFrameworkInfoPosition;
+
+  window.syncFrameworkInfoPosition = function syncFrameworkInfoPositionPatched(){
+    const wrap = document.querySelector('.wrap');
+    const panel = document.getElementById('frameworkInfoPanel');
+    if (!wrap || !panel) return;
+
+    const wrapRect = wrap.getBoundingClientRect();
+    const availableLeft = Math.max(0, wrapRect.left - VIEWPORT_PADDING);
+    const sidebarCanFit = window.innerWidth >= SIDEBAR_MIN_VIEWPORT && availableLeft >= (MINIMUM_WIDTH + MINIMUM_GAP);
+
+    if (!sidebarCanFit) {
+      wrap.style.removeProperty('--framework-info-top');
+      wrap.style.removeProperty('--framework-info-left');
+      wrap.style.removeProperty('--framework-info-width');
+      wrap.style.removeProperty('--framework-info-gap');
+      return;
+    }
+
+    const hero = document.querySelector('.hero');
+    const heroRect = hero ? hero.getBoundingClientRect() : null;
+    const topbar = document.querySelector('.topbar');
+    const topbarRect = topbar ? topbar.getBoundingClientRect() : null;
+    const fallbackTopOffset = 16;
+    const panelTop = heroRect
+      ? Math.max(0, heroRect.top - wrapRect.top)
+      : (topbarRect ? Math.max(0, (topbarRect.top - wrapRect.top) + fallbackTopOffset) : fallbackTopOffset);
+
+    let width = Math.min(PREFERRED_WIDTH, Math.max(MINIMUM_WIDTH, availableLeft - PREFERRED_GAP));
+    let gap = Math.min(PREFERRED_GAP, Math.max(MINIMUM_GAP, availableLeft - width));
+
+    if (width + gap > availableLeft) {
+      gap = MINIMUM_GAP;
+      width = Math.max(MINIMUM_WIDTH, availableLeft - gap);
+    }
+
+    const panelLeft = VIEWPORT_PADDING - wrapRect.left;
+
+    wrap.style.setProperty('--framework-info-top', `${panelTop}px`);
+    wrap.style.setProperty('--framework-info-left', `${panelLeft}px`);
+    wrap.style.setProperty('--framework-info-width', `${width}px`);
+    wrap.style.setProperty('--framework-info-gap', `${gap}px`);
+  };
+
+  function resyncFrameworkSidebar(){
+    window.requestAnimationFrame(window.syncFrameworkInfoPosition);
+  }
+
+  window.addEventListener('resize', resyncFrameworkSidebar);
+  document.addEventListener('DOMContentLoaded', resyncFrameworkSidebar);
+  resyncFrameworkSidebar();
+
+  window.__originalSyncFrameworkInfoPosition = originalSyncFrameworkInfoPosition;
+})();
+</script>
+
+
+<script id="custom-test-behavior-patch">
+(function(){
+  const qs = (s) => document.querySelector(s);
+  const testSelect = qs('#testId');
+  const customControls = qs('#customTestControls');
+  const customPrompt = qs('#customPrompt');
+  const customPromptOnly = qs('#customPromptOnly');
+  const customFiles = qs('#customFileInput');
+  const subjectFiles = qs('#fileInput');
+  const modeTextBtn = qs('#modeText');
+  const webModeWrap = qs('#webMode');
+  const textModeWrap = qs('#textMode');
+
+  // Temporary feature flag: keep Custom test code available, but hide/disable the UI for now.
+  const CUSTOM_TEST_FEATURE_ENABLED = false;
+  function rawCustomSelected(){ return String(testSelect?.value || '') === 'custom'; }
+  function deactivateCustomTestUi(){
+    document.body.classList.toggle('custom-tests-disabled', !CUSTOM_TEST_FEATURE_ENABLED);
+    if (!testSelect) return;
+    testSelect.querySelectorAll('option[value="custom"]').forEach(opt => {
+      opt.hidden = !CUSTOM_TEST_FEATURE_ENABLED;
+      opt.disabled = !CUSTOM_TEST_FEATURE_ENABLED;
+      opt.style.display = CUSTOM_TEST_FEATURE_ENABLED ? '' : 'none';
+    });
+    if (!CUSTOM_TEST_FEATURE_ENABLED && rawCustomSelected()){
+      testSelect.value = 'jungian16';
+    }
+    if (!CUSTOM_TEST_FEATURE_ENABLED){
+      if (customControls) customControls.classList.add('hidden');
+      qs('#customCategoryOverlay')?.classList.remove('show');
+    }
+  }
+
+  function isCustomSelected(){ return CUSTOM_TEST_FEATURE_ENABLED && rawCustomSelected(); }
+  function isPromptOnly(){ return !!(isCustomSelected() && customPromptOnly && customPromptOnly.checked); }
+  function toggleFieldDisabled(sel, disabled){
+    const el = qs(sel); if (!el) return;
+    el.disabled = !!disabled;
+    const box = el.closest('div'); if (box) box.classList.toggle('custom-disabled', !!disabled);
+  }
+
+  function syncCustomUi(){
+    deactivateCustomTestUi();
+    const custom = isCustomSelected();
+    if (customControls) customControls.classList.toggle('hidden', !custom);
+    document.body.classList.toggle('custom-test-active', custom);
+    const promptOnly = isPromptOnly();
+    const isTextMode = String(mode || '') === 'text';
+    const isWebMode = String(mode || '') === 'web';
+
+    ['#sourceSite','#profileName','#postLimit','#timePeriod','#fromDate','#toDate','#includeReplies','#includeReposts','#includeMediaCaptions','#youtubeVideosPosted','#youtubeShortsPosted','#youtubePlaylists'].forEach(sel => toggleFieldDisabled(sel, promptOnly && isWebMode));
+    ['#textInput','#fileInput','#clarifications'].forEach(sel => toggleFieldDisabled(sel, promptOnly && isTextMode));
+
+    if (modeTextBtn){
+      modeTextBtn.disabled = false;
+      modeTextBtn.classList.remove('custom-disabled');
+    }
+    const blurb = qs('#testBlurbText'); if (blurb) blurb.style.whiteSpace = custom ? 'pre-line' : '';
+  }
+
+  testSelect?.addEventListener('change', syncCustomUi);
+  customPromptOnly?.addEventListener('change', syncCustomUi);
+  qs('#modeWeb')?.addEventListener('click', () => window.requestAnimationFrame(syncCustomUi));
+  qs('#modeText')?.addEventListener('click', () => window.requestAnimationFrame(syncCustomUi));
+  customFiles?.addEventListener('change', () => { if (customFiles.files.length > 5) alert('You can upload up to 5 Custom test files.'); });
+  subjectFiles?.addEventListener('change', () => { if (subjectFiles.files.length > 5) alert('You can upload up to 5 files.'); });
+  document.addEventListener('DOMContentLoaded', syncCustomUi);
+  syncCustomUi();
+
+  const originalReadInputs = readInputs;
+  readInputs = function(){
+    const base = originalReadInputs ? originalReadInputs() : {};
+    const promptOnly = isPromptOnly();
+    return {
+      ...base,
+      mode: base.mode || mode,
+      sourceSite: promptOnly ? '' : (base.sourceSite || ''),
+      sourceSiteLabel: promptOnly ? '' : (base.sourceSiteLabel || ''),
+      profileName: promptOnly ? '' : (base.profileName || ''),
+      sourceAccountId: promptOnly ? '' : (base.sourceAccountId || ''),
+      sourceContentTypes: promptOnly ? [] : (base.sourceContentTypes || []),
+      postLimit: base.postLimit || '150',
+      timePeriod: base.timePeriod || 'last_30_days',
+      fromDate: base.fromDate || '',
+      toDate: base.toDate || '',
+      includeReplies: !!base.includeReplies,
+      includeReposts: !!base.includeReposts,
+      includeMediaCaptions: !!base.includeMediaCaptions,
+      text: promptOnly ? '' : (base.text || ''),
+      customPrompt: String(customPrompt?.value || '').trim(),
+      customPromptOnly: promptOnly ? 'true' : 'false',
+      privacyFilterMode: base.privacyFilterMode || currentPrivacyFilterMode()
+    };
+  };
+
+  postJSONorMultipart = async function(url, payload, files){
+    const prepared = await preparePayloadForPrivacy(url, payload, files);
+    payload = prepared.payload;
+    files = prepared.files;
+    const cf = customFiles?.files || [];
+    const sf = files || [];
+    const needsMultipart = !!((sf && sf.length) || (cf && cf.length) || ((payload.mode === 'text') && payload.text));
+    if (needsMultipart){
+      const fd = new FormData();
+      for (const [k,v] of Object.entries(payload || {})) fd.append(k, v == null ? '' : v);
+      if (sf) Array.from(sf).forEach(f => fd.append('files', f));
+      if (cf) Array.from(cf).forEach(f => fd.append('customFiles', f));
+      const res = await fetch(url, { method:'POST', body: fd, credentials:'include' });
+      if (!res.ok) throw new Error(JSON.stringify(await res.json()));
+      return res.json();
+    }
+    const res = await fetch(url, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload), credentials:'include' });
+    if (!res.ok) throw new Error(JSON.stringify(await res.json()));
+    return res.json();
+  };
+
+  function validateCustom(input, subjectFileList){
+    if (!isCustomSelected()) return true;
+    const cf = customFiles?.files || [];
+    if (cf.length > 5) { alert('You can upload up to 5 Custom test files.'); return false; }
+    if ((subjectFileList?.length || 0) > 5) { alert('You can upload up to 5 files.'); return false; }
+    if (!input.customPrompt && !cf.length){ alert('Describe the Custom test or upload a file that defines it.'); return false; }
+    if (isPromptOnly()) return true;
+    if (mode === 'web' && (!input.sourceSite || !input.sourceAccountId || input.sourceAccountId === LOGIN_NEW_SOURCE_VALUE)){ alert('Please choose a verified source user, or enable Prompt only.'); return false; }
+    if (mode === 'web' && input.sourceSite === 'youtube' && !(input.sourceContentTypes || []).length){ alert('Please choose at least one available YouTube content type: Videos posted, Shorts posted, or Playlists.'); return false; }
+    if (mode === 'text' && !validateWriteInputs(input)){ return false; }
+    return true;
+  }
+
+  async function runCustomAware(url, deep){
+    const files = isPromptOnly() ? [] : (subjectFiles?.files || []);
+    const input = readInputs();
+    if (!validateCustom(input, files)) return;
+    hideSaveToProfile();
+    if (!deep) qs('#freeResult')?.classList.add('hidden');
+    if (deep){
+      qs('#proBlock')?.classList.remove('hidden');
+      qs('#freeResult')?.classList.remove('hidden');
+      qs('#freeResult').textContent = 'Analyzing…';
+      qs('#proFull').textContent = '';
+    }
+    showProgress(true);
+    try{
+      const data = await postJSONorMultipart(url, input, files);
+      const probs = formatTopLine(input.testId, data.top_types || []);
+      const probsLabel = topLineLabel(input.testId);
+      const split = splitDominantLine(data.summary || '');
+      const summaryText = [split.headline, split.body, (probs ? `${probsLabel}: ${probs}` : '')].filter(Boolean).join('\n\n');
+      qs('#freeResult').textContent = summaryText;
+      qs('#freeResult').classList.remove('hidden');
+      if (deep){
+        qs('#proFull').textContent = [(probs ? `${probsLabel}: ${probs}` : ''), data.full_report || ''].filter(Boolean).join('\n\n');
+        lastReportId = data.reportId;
+        lastProPayload = { testId: input.testId, summary: data.summary || '', top_types: data.top_types || [], full_report: data.full_report || '', citations: data.citations || [] };
+        const runSourceKind = isPromptOnly() ? 'custom_prompt' : (mode === 'web' ? 'source_api' : ((files && files.length) ? 'file' : 'text'));
+        let runSourceDetail = '';
+        if (runSourceKind === 'source_api') runSourceDetail = JSON.stringify({ sourceSite: input.sourceSite || '', sourceSiteLabel: input.sourceSiteLabel || '', profileName: input.profileName || '', sourceAccountId: input.sourceAccountId || '', postLimit: input.postLimit || '', timePeriod: input.timePeriod || '', fromDate: input.fromDate || '', toDate: input.toDate || '', includeReplies: !!input.includeReplies, includeReposts: !!input.includeReposts, includeMediaCaptions: !!input.includeMediaCaptions, sourceContentTypes: input.sourceContentTypes || [], privacyFilterMode: input.privacyFilterMode || 'off' });
+        if (runSourceKind === 'file') { try { runSourceDetail = JSON.stringify(Array.from(files).map(f => f?.name || '').filter(Boolean)); } catch {} }
+        if (runSourceKind === 'custom_prompt') runSourceDetail = 'Prompt only';
+        lastProContext = { source_site: input.sourceSite || '', profile_name: input.profileName || '', mode: input.mode, run_source_kind: runSourceKind, run_source_detail: runSourceDetail };
+        qs('#saveProfileWrap')?.classList.remove('hidden');
+      }
+    }catch(e){ showError(e); }
+    finally{ showProgress(false); }
+  }
+
+  const originalRunFree = qs('#runFree')?.onclick;
+  const originalRunPro = qs('#runPro')?.onclick;
+  if (qs('#runFree')) qs('#runFree').onclick = function(){
+    if (!isCustomSelected()) return originalRunFree && originalRunFree.call(this);
+    maybePromptToSavePdf(() => runCustomAware('/api/free-mbti', false));
+  };
+  if (qs('#runPro')) qs('#runPro').onclick = function(){
+    if (!isCustomSelected()) return originalRunPro && originalRunPro.call(this);
+    maybePromptToSavePdf(() => runCustomAware('/api/pro-mbti', true));
+  };
+
+  function slugifyCategory(name){
+    return String(name || '').trim().toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,80) || 'custom';
+  }
+  function categoryLabelFromTestId(testId, estimates){
+    const label = String(estimates?.custom_test_label || '').trim();
+    if (label) return label;
+    return String(testId || '').replace(/^custom:/,'').split('-').filter(Boolean).map(w => w.charAt(0).toUpperCase()+w.slice(1)).join(' ') || 'Custom';
+  }
+  function isCustomPayload(){ return CUSTOM_TEST_FEATURE_ENABLED && String(lastProPayload?.testId || '') === 'custom'; }
+
+  const baseSaveCurrent = saveCurrentProRunToProfile;
+  saveCurrentProRunToProfile = async function(profileId, customCategory){
+    if (!isCustomPayload()) return baseSaveCurrent(profileId);
+    const testId = String(customCategory?.testId || '').trim();
+    const label = String(customCategory?.label || '').trim();
+    if (!/^custom:[a-z0-9][a-z0-9-]{0,79}$/i.test(testId)) throw new Error(JSON.stringify({ error:'Choose or create a Custom test category.' }));
+    const prev = lastProPayload;
+    lastProPayload = { ...(lastProPayload || {}), testId, custom_test_label: label || categoryLabelFromTestId(testId) };
+    try { return await baseSaveCurrent(profileId); }
+    finally { lastProPayload = prev; }
+  };
+
+  async function loadCustomCategories(profileId){
+    if (!CUSTOM_TEST_FEATURE_ENABLED) return [];
+    const res = await fetch(`/api/profiles/${encodeURIComponent(profileId)}/results`, { credentials:'include' });
+    if (!res.ok) return [];
+    const data = await res.json().catch(() => ({ results: [] }));
+    const seen = new Map();
+    for (const r of (data.results || [])){
+      const tid = String(r.test_id || '');
+      if (!tid.startsWith('custom:')) continue;
+      if (!seen.has(tid)) seen.set(tid, categoryLabelFromTestId(tid, r.estimates));
+    }
+    return Array.from(seen.entries()).map(([testId,label]) => ({ testId, label })).sort((a,b)=>a.label.localeCompare(b.label));
+  }
+
+  let pendingCustomProfile = null;
+  async function openCustomCategoryModal(profile){
+    if (!CUSTOM_TEST_FEATURE_ENABLED) return;
+    pendingCustomProfile = profile;
+    const overlay = qs('#customCategoryOverlay');
+    const select = qs('#customCategorySelect');
+    const input = qs('#customCategoryInput');
+    const msg = qs('#customCategoryMsg');
+    if (!overlay || !select || !input || !profile) return;
+    msg.textContent = '';
+    input.value = '';
+    select.innerHTML = '<option value="">--- Choose existing category ---</option>';
+    const categories = await loadCustomCategories(profile.id);
+    for (const c of categories){
+      const opt = document.createElement('option'); opt.value = c.testId; opt.textContent = c.label; select.appendChild(opt);
+    }
+    overlay.classList.add('show');
+    setTimeout(() => input.focus(), 50);
+  }
+  function closeCustomCategoryModal(){ qs('#customCategoryOverlay')?.classList.remove('show'); pendingCustomProfile = null; }
+  qs('#customCategoryClose')?.addEventListener('click', closeCustomCategoryModal);
+  qs('#customCategoryCancel')?.addEventListener('click', closeCustomCategoryModal);
+  qs('#customCategorySave')?.addEventListener('click', async () => {
+    const profile = pendingCustomProfile;
+    if (!profile) return closeCustomCategoryModal();
+    const select = qs('#customCategorySelect');
+    const input = qs('#customCategoryInput');
+    const msg = qs('#customCategoryMsg');
+    const typed = String(input?.value || '').trim();
+    let testId = String(select?.value || '').trim();
+    let label = '';
+    if (typed){ label = typed; testId = `custom:${slugifyCategory(typed)}`; }
+    else if (testId){ label = select.options[select.selectedIndex]?.textContent || categoryLabelFromTestId(testId); }
+    if (!testId){ if (msg) msg.textContent = 'Choose an existing category or enter a new one.'; return; }
+    try{
+      const data = await saveCurrentProRunToProfile(profile.id, { testId, label });
+      lastSavedRunId = data?.saved_result_id || null;
+      closeCustomCategoryModal();
+      showSavedFeedback(profile.display_name);
+    }catch(e){ showError(e); }
+  });
+
+  renderSaveMenu = function(profiles){
+    const menu = qs('#saveToProfileMenu');
+    if (!menu) return;
+    menu.innerHTML = '';
+    const mkItem = (text, onClick) => {
+      const btn = document.createElement('button');
+      btn.type = 'button'; btn.textContent = text;
+      btn.style.width = '100%'; btn.style.textAlign = 'left'; btn.style.padding = '10px 12px'; btn.style.background = '#fff'; btn.style.border = 'none'; btn.style.cursor = 'pointer';
+      btn.onmouseenter = () => { btn.style.background = '#f2f4f8'; };
+      btn.onmouseleave = () => { btn.style.background = '#fff'; };
+      btn.onclick = async () => { try { menu.classList.add('hidden'); await onClick(); } catch(e){ showError(e); } };
+      menu.appendChild(btn);
+    };
+    if (Array.isArray(profiles) && profiles.length){
+      profiles.forEach(p => mkItem(p.display_name, async () => {
+        if (isCustomPayload()) return openCustomCategoryModal(p);
+        const data = await saveCurrentProRunToProfile(p.id);
+        lastSavedRunId = data?.saved_result_id || null;
+        showSavedFeedback(p.display_name);
+      }));
+      const hr = document.createElement('div'); hr.style.height = '1px'; hr.style.background = 'var(--border)'; menu.appendChild(hr);
+    }
+    mkItem('Create new profile', async () => openProfileModal());
+  };
+
+  qs('#profileCreate').onclick = async () => {
+    const name = qs('#profileNameInput').value.trim();
+    qs('#profileMsg').textContent = '';
+    if (!name) { qs('#profileMsg').textContent = 'Please enter a profile name.'; return; }
+    try{
+      const source_site = 'profile';
+      const profile_name = toProfileKey(name);
+      const res = await fetch('/api/profiles', { method:'POST', headers:{'Content-Type':'application/json'}, credentials:'include', body: JSON.stringify({ display_name:name, source_site, profile_name }) });
+      if (!res.ok){ const j = await safeReadJson(res); throw new Error(JSON.stringify(j || { error:'Request failed' })); }
+      const data = await res.json(); const profile = data.profile;
+      if (!profile?.id) throw new Error(JSON.stringify({ error:'Failed to create profile' }));
+      closeProfileModal();
+      if (isCustomPayload()) return openCustomCategoryModal(profile);
+      const saveRes = await saveCurrentProRunToProfile(profile.id);
+      lastSavedRunId = saveRes?.saved_result_id || null;
+      showSavedFeedback(profile.display_name);
+    }catch(e){ showError(e); }
+  };
+})();
+</script>
+
+</body>
+</html>
